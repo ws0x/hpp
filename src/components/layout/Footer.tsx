@@ -35,6 +35,7 @@ export function Footer({ email, location, linkedin }: FooterProps) {
                 { label: 'Home', href: '/' },
                 { label: 'About', href: '/about' },
                 { label: 'Services', href: '/services' },
+                { label: 'Careers', href: '/careers' },
                 { label: 'Insights', href: '/insights' },
                 { label: 'Contact', href: '/contact' },
               ].map(({ label, href }) => (

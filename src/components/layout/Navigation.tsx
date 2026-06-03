@@ -10,6 +10,7 @@ import { Container } from '@/components/ui/Container'
 const navLinks = [
   { label: 'About', href: '/about' },
   { label: 'Services', href: '/services' },
+  { label: 'Careers', href: '/careers' },
   { label: 'Insights', href: '/insights' },
   { label: 'Contact', href: '/contact' },
 ]

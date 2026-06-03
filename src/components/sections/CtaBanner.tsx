@@ -39,7 +39,7 @@ export function CtaBanner({
           <Button href={bookingUrl || '/contact'} variant="primary" size="lg">
             {primaryLabel}
           </Button>
-          <Button href="/contact" variant="outline" size="lg" className="border-white/40 text-white hover:bg-white/10 hover:text-white">
+          <Button href="/contact" variant="outline-light" size="lg">
             {secondaryLabel}
           </Button>
         </div>

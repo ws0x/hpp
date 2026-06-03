@@ -129,7 +129,7 @@ export default async function ServicesPage() {
               return (
                 <article
                   key={service.id}
-                  className={`grid grid-cols-1 lg:grid-cols-2 gap-10 items-center ${isReversed ? 'lg:flex-row-reverse' : ''} animate-fade-up`}
+                  className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center animate-fade-up"
                   style={{ animationDelay: `${i * 80}ms` }}
                 >
                   {/* Icon block */}

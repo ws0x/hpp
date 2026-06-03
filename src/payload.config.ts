@@ -13,6 +13,9 @@ import { Testimonials } from './collections/Testimonials'
 import { Certifications } from './collections/Certifications'
 import { Leads } from './collections/Leads'
 import { Subscribers } from './collections/Subscribers'
+import { Jobs } from './collections/Jobs'
+import { JobApplications } from './collections/JobApplications'
+import { TalentProfiles } from './collections/TalentProfiles'
 
 import { SiteSettings } from './globals/SiteSettings'
 import { HeroContent } from './globals/HeroContent'
@@ -48,6 +51,9 @@ export default buildConfig({
     Certifications,
     Leads,
     Subscribers,
+    Jobs,
+    JobApplications,
+    TalentProfiles,
   ],
 
   globals: [

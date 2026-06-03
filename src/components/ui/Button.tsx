@@ -2,7 +2,7 @@ import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from 'react'
 import Link from 'next/link'
 
 type BaseProps = {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost'
+  variant?: 'primary' | 'secondary' | 'outline' | 'outline-light' | 'ghost'
   size?: 'sm' | 'md' | 'lg'
   children: React.ReactNode
   className?: string
@@ -26,6 +26,9 @@ const variants = {
     'bg-navy !text-white hover:bg-navy-dark active:scale-[0.98] shadow-sm',
   outline:
     'border-2 border-navy !text-navy bg-transparent hover:bg-navy hover:!text-white active:scale-[0.98]',
+  // Use on dark/navy backgrounds — text stays white regardless of bg
+  'outline-light':
+    'border-2 border-white/40 !text-white bg-transparent hover:bg-white/10 hover:!text-white active:scale-[0.98]',
   ghost:
     '!text-navy bg-transparent hover:bg-blue-light active:scale-[0.98]',
 }

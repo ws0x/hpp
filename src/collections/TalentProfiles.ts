@@ -1,0 +1,126 @@
+import type { CollectionConfig } from 'payload'
+
+export const TalentProfiles: CollectionConfig = {
+  slug: 'talent-profiles',
+  admin: {
+    useAsTitle: 'name',
+    group: 'Careers',
+    defaultColumns: ['name', 'headline', 'industry', 'experienceLevel', 'region', 'isVisible', 'submittedAt'],
+    description: 'Candidates who registered via the "Be Found" talent form. Seeds the Phase 3 talent pool.',
+  },
+  access: {
+    read: ({ req }) => !!req.user,
+    create: () => true,
+    update: ({ req }) => !!req.user,
+    delete: ({ req }) => !!req.user,
+  },
+  fields: [
+    {
+      name: 'name',
+      type: 'text',
+      required: true,
+      label: 'Full Name',
+    },
+    {
+      name: 'email',
+      type: 'email',
+      required: true,
+      label: 'Email Address',
+    },
+    {
+      name: 'phone',
+      type: 'text',
+      label: 'Phone Number',
+    },
+    {
+      name: 'headline',
+      type: 'text',
+      label: 'Professional Headline',
+      admin: { description: 'e.g. "Senior HR Business Partner | 8 Years MENA Experience"' },
+    },
+    {
+      name: 'industry',
+      type: 'select',
+      label: 'Industry',
+      options: [
+        { label: 'Technology', value: 'technology' },
+        { label: 'Finance & Banking', value: 'finance' },
+        { label: 'Healthcare', value: 'healthcare' },
+        { label: 'Real Estate', value: 'real-estate' },
+        { label: 'Retail & E-Commerce', value: 'retail' },
+        { label: 'Manufacturing', value: 'manufacturing' },
+        { label: 'Education', value: 'education' },
+        { label: 'Hospitality & Tourism', value: 'hospitality' },
+        { label: 'HR & Consulting', value: 'hr-consulting' },
+        { label: 'Other', value: 'other' },
+      ],
+    },
+    {
+      name: 'experienceLevel',
+      type: 'select',
+      label: 'Experience Level',
+      options: [
+        { label: 'Entry Level (0–2 years)', value: 'entry' },
+        { label: 'Mid Level (2–5 years)', value: 'mid' },
+        { label: 'Senior Level (5–10 years)', value: 'senior' },
+        { label: 'Executive (10+ years)', value: 'executive' },
+      ],
+    },
+    {
+      name: 'skills',
+      type: 'array',
+      label: 'Key Skills / Competencies',
+      maxRows: 10,
+      admin: { description: 'Add up to 10 key skills.' },
+      fields: [
+        {
+          name: 'skill',
+          type: 'text',
+          label: 'Skill',
+          required: true,
+        },
+      ],
+    },
+    {
+      name: 'region',
+      type: 'select',
+      label: 'Preferred Work Region',
+      options: [
+        { label: 'UAE', value: 'uae' },
+        { label: 'Saudi Arabia', value: 'ksa' },
+        { label: 'Egypt', value: 'egypt' },
+        { label: 'Qatar', value: 'qatar' },
+        { label: 'Kuwait', value: 'kuwait' },
+        { label: 'Bahrain', value: 'bahrain' },
+        { label: 'Jordan', value: 'jordan' },
+        { label: 'Lebanon', value: 'lebanon' },
+        { label: 'MENA (Any)', value: 'mena' },
+        { label: 'Remote', value: 'remote' },
+      ],
+    },
+    {
+      name: 'linkedIn',
+      type: 'text',
+      label: 'LinkedIn Profile URL',
+    },
+    {
+      name: 'cv',
+      type: 'upload',
+      relationTo: 'media',
+      label: 'CV / Resume',
+    },
+    {
+      name: 'isVisible',
+      type: 'checkbox',
+      label: 'Visible in talent pool',
+      defaultValue: true,
+      admin: { position: 'sidebar' },
+    },
+    {
+      name: 'submittedAt',
+      type: 'date',
+      label: 'Submitted At',
+      admin: { position: 'sidebar' },
+    },
+  ],
+}
