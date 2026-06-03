@@ -27,18 +27,46 @@ import { StatsContent } from './globals/StatsContent'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-// ─── FIX B: Serverless-safe connection pool ──────────────────────────────────
-// Default pg pool = 10 conns per lambda instance. Neon free tier allows only
-// ~5 concurrent connections total. One cold-start burst exhausts the budget.
-// max:1 means each serverless invocation holds at most one connection; Neon's
-// pooler or connection queue handles the rest safely.
-const db = process.env.DATABASE_URI
+// ─── Serverless-safe Neon connection ─────────────────────────────────────────
+//
+// Two problems to solve for Vercel + Neon free tier:
+//
+// 1. COLD-START TIMEOUT — Neon free tier auto-suspends after 5 min of
+//    inactivity. Resuming the compute takes 8–15 seconds. Our previous
+//    connectionTimeoutMillis: 5000 always lost that race → "timeout exceeded
+//    when trying to connect" → admin page crashes on every cold hit.
+//    Fix: raise to 30 000 ms (30 s), safely inside Vercel's 60 s maxDuration.
+//
+// 2. POOLER ENDPOINT — The raw direct endpoint (ep-xxx.neon.tech) opens a new
+//    backend process per connection. With max:1 this is fine for throughput but
+//    the raw endpoint still has to resume compute on cold start.
+//    The pooler endpoint (ep-xxx-pooler.neon.tech, PgBouncer) keeps a warm
+//    proxy in front of the compute, so connections resolve in <100 ms even
+//    when compute is sleeping — it wakes the compute while PgBouncer queues
+//    the query. We auto-rewrite the connection string to the pooler hostname
+//    when running on Vercel (VERCEL=1) so dev still hits the direct endpoint.
+//
+function toPoolerUrl(raw: string): string {
+  // Only rewrite on Vercel and only if not already a pooler URL
+  if (!process.env.VERCEL || raw.includes('-pooler.')) return raw
+  // Neon direct:  ep-<name>.<region>.aws.neon.tech
+  // Neon pooler:  ep-<name>-pooler.<region>.aws.neon.tech
+  return raw.replace(
+    /(ep-[^.]+)(\.[\w-]+\.aws\.neon\.tech)/,
+    '$1-pooler$2',
+  )
+}
+
+const rawDatabaseUri = process.env.DATABASE_URI || ''
+const databaseUri    = toPoolerUrl(rawDatabaseUri)
+
+const db = databaseUri
   ? postgresAdapter({
       pool: {
-        connectionString: process.env.DATABASE_URI,
-        max: 1,                   // critical for serverless — prevents conn exhaustion
-        idleTimeoutMillis: 10000, // release idle conn after 10s (lambda lifespan)
-        connectionTimeoutMillis: 5000,
+        connectionString: databaseUri,
+        max: 1,                       // 1 conn per lambda — prevents pool exhaustion
+        idleTimeoutMillis:  10_000,   // release after 10 s of idle (lambda lifespan)
+        connectionTimeoutMillis: 30_000, // 30 s — enough for Neon free-tier wake-up
       },
     })
   : sqliteAdapter({ client: { url: 'file:./payload.db' } })
