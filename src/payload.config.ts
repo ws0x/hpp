@@ -27,17 +27,19 @@ import { StatsContent } from './globals/StatsContent'
 const filename = fileURLToPath(import.meta.url)
 const dirname  = path.dirname(filename)
 
-// DATABASE_URI in Vercel is now set to the Neon pooler endpoint directly.
-// The pooler (PgBouncer) never suspends — connections complete in <100 ms
-// regardless of whether Neon compute is sleeping.
-// max:1 prevents connection-pool exhaustion on serverless (one conn per lambda).
+// DATABASE_URI must be the Neon *pooler* endpoint (PgBouncer).
+// max:3 — Payload's db-postgres adapter holds one dedicated PoolClient
+// (in connectWithReconnect) for error monitoring and never releases it.
+// With max:1 that permanent hold blocks all queries, causing timeouts.
+// 3 gives the held monitor client + 2 slots for concurrent queries.
+// PgBouncer on the Neon side handles the actual Postgres connection cap.
 const db = process.env.DATABASE_URI
   ? postgresAdapter({
       pool: {
         connectionString: process.env.DATABASE_URI,
-        max: 1,
-        idleTimeoutMillis:     10_000,
-        connectionTimeoutMillis: 8_000, // <10 s Vercel hobby limit; pooler responds in <1 s
+        max: 3,
+        idleTimeoutMillis:       20_000,
+        connectionTimeoutMillis: 25_000,
       },
     })
   : sqliteAdapter({ client: { url: 'file:./payload.db' } })
