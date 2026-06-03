@@ -25,7 +25,7 @@ export function HeroSection({
   aboutLinkLabel,
 }: HeroProps) {
   return (
-    <section className="relative overflow-hidden bg-surface pt-10 pb-16 sm:pt-12 sm:pb-20 lg:pt-20 lg:pb-28">
+    <section className="relative overflow-hidden bg-surface pt-8 pb-14 sm:pt-12 sm:pb-20 lg:pt-20 lg:pb-28">
       {/* Subtle background gradient */}
       <div
         aria-hidden
@@ -37,8 +37,8 @@ export function HeroSection({
       />
 
       <Container>
-        {/* Mobile: portrait first, then copy. Desktop: copy left, portrait right */}
-        <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-8 lg:gap-8 lg:items-center">
+        {/* Mobile: copy first, then portrait below. Desktop: copy left, portrait right */}
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-8 lg:items-center">
           {/* Left — copy */}
           <div className="animate-fade-up">
             <p className="text-sm font-semibold uppercase tracking-widest text-orange mb-4">
@@ -65,8 +65,8 @@ export function HeroSection({
             </div>
           </div>
 
-          {/* Right — portrait card */}
-          <div className="flex justify-center lg:justify-end animate-fade-up delay-200">
+          {/* Right — portrait card (centered on mobile, right-aligned on desktop) */}
+          <div className="flex justify-center lg:justify-end animate-fade-up delay-200 mt-2 lg:mt-0">
             <div className="relative">
               {/* Portrait — smaller on mobile, larger on desktop */}
               <div
@@ -108,9 +108,10 @@ export function HeroSection({
                 {aboutLinkLabel && (
                   <a
                     href="/about"
-                    className="inline-flex items-center gap-1 text-sm font-medium text-blue-accent hover:text-navy mt-2 transition-colors"
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-accent hover:text-navy mt-2 transition-colors"
                   >
-                    {aboutLinkLabel}
+                    {/* Strip any trailing arrow characters the CMS may have stored in the label */}
+                    {aboutLinkLabel.replace(/\s*[→»>]+\s*$/, '')}
                     <ArrowRight size={14} />
                   </a>
                 )}

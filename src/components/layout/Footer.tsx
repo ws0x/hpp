@@ -15,7 +15,7 @@ export function Footer({ email, location, linkedin }: FooterProps) {
   return (
     <footer className="bg-navy text-white">
       <Container>
-        <div className="py-12 grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="py-10 sm:py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10">
           {/* Brand */}
           <div>
             <p className="text-2xl font-extrabold tracking-tight mb-3" style={{ fontFamily: 'var(--font-display)' }}>

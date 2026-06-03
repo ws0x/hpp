@@ -6,7 +6,7 @@ export function WhySection({ points }: { points: string[] }) {
   return (
     <section className="py-20 bg-white">
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
           {/* Left text */}
           <div>
             <SectionHeader

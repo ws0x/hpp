@@ -105,7 +105,8 @@
   /* ── Paragraphs ── */
   p {
     color: var(--color-text-muted);
-    max-width: 65ch;
+    /* max-width intentionally NOT set here — it was restricting card & grid content.
+       Apply max-w-xl / max-w-2xl per-section where a prose width is desired. */
   }
 
   /* ── Focus styles (accessibility) ── */
@@ -172,3 +173,23 @@
   scrollbar-width: none;
 }
 .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+/* ── Mobile touch target helper ── */
+@media (max-width: 768px) {
+  /* Ensure interactive elements meet 44px minimum touch target */
+  a.btn, button.btn, [role="button"] {
+    min-height: 44px;
+  }
+
+  /* Prevent text overflow on narrow screens */
+  h1, h2 {
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  /* Tighten section padding on mobile for more content density */
+  .section-tight-mobile {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+}

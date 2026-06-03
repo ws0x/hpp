@@ -16,7 +16,7 @@ export function StatsBar({ stats = defaultStats }: { stats?: Stat[] }) {
       aria-label="Key statistics"
     >
       <Container>
-        <dl className="grid grid-cols-2 sm:grid-cols-4 gap-8 sm:gap-4">
+        <dl className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-4">
           {stats.map((stat, i) => (
             <div
               key={i}

@@ -132,8 +132,8 @@ export default async function ServicesPage() {
                   className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center animate-fade-up"
                   style={{ animationDelay: `${i * 80}ms` }}
                 >
-                  {/* Icon block */}
-                  <div className={`flex justify-center ${isReversed ? 'lg:order-2' : ''}`}>
+                  {/* Icon block — hidden on mobile, shown on desktop */}
+                  <div className={`hidden lg:flex justify-center ${isReversed ? 'lg:order-2' : ''}`}>
                     <div className="w-48 h-48 rounded-2xl bg-blue-light flex items-center justify-center shadow-card">
                       <Icon size={72} className="text-blue-accent" strokeWidth={1.25} />
                     </div>

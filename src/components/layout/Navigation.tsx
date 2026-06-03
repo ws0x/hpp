@@ -93,35 +93,40 @@ export function Navigation({ bookingUrl }: { bookingUrl?: string }) {
         </nav>
       </Container>
 
-      {/* Mobile menu */}
-      {open && (
-        <div id="mobile-menu" className="md:hidden bg-white border-t border-border shadow-lg">
-          <Container>
-            <ul className="py-4 space-y-1" role="list">
-              {navLinks.map(({ label, href }) => {
-                const active = pathname === href || pathname.startsWith(href + '/')
-                return (
-                  <li key={href}>
-                    <Link
-                      href={href}
-                      className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                        active ? 'text-navy bg-blue-light' : 'text-text-muted hover:text-navy hover:bg-blue-light'
-                      }`}
-                    >
-                      {label}
-                    </Link>
-                  </li>
-                )
-              })}
-              <li className="pt-2">
-                <Button href={bookingUrl || '/contact'} variant="primary" size="sm" className="w-full">
-                  Book a Call
-                </Button>
-              </li>
-            </ul>
-          </Container>
-        </div>
-      )}
+      {/* Mobile menu — animated slide-down */}
+      <div
+        id="mobile-menu"
+        className={`md:hidden bg-white border-t border-border shadow-lg overflow-hidden transition-all duration-300 ease-in-out ${
+          open ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
+        }`}
+        aria-hidden={!open}
+      >
+        <Container>
+          <ul className="py-4 space-y-1" role="list">
+            {navLinks.map(({ label, href }) => {
+              const active = pathname === href || pathname.startsWith(href + '/')
+              return (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                      active ? 'text-navy bg-blue-light' : 'text-text-muted hover:text-navy hover:bg-blue-light'
+                    }`}
+                    tabIndex={open ? 0 : -1}
+                  >
+                    {label}
+                  </Link>
+                </li>
+              )
+            })}
+            <li className="pt-2 pb-2">
+              <Button href={bookingUrl || '/contact'} variant="primary" size="sm" className="w-full justify-center">
+                Book a Call
+              </Button>
+            </li>
+          </ul>
+        </Container>
+      </div>
     </header>
   )
 }
