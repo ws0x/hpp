@@ -22,7 +22,7 @@ const defaultHero = {
   primaryCtaLabel: "Let's Connect",
   secondaryCtaLabel: 'View My Services',
   identityTitle: 'HR Business Partner and Talent Strategist',
-  aboutLinkLabel: 'Read More About Me →',
+  aboutLinkLabel: 'Read More About Me',
 }
 
 const defaultWhyPoints = [
