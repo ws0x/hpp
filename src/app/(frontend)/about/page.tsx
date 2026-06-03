@@ -96,12 +96,15 @@ export default async function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
             {/* Portrait */}
             <div className="lg:col-span-2 flex justify-center lg:justify-start">
-              <div className="relative w-64 h-64 lg:w-80 lg:h-80 rounded-2xl overflow-hidden bg-blue-light shadow-card-hover">
-                <div className="w-full h-full flex items-center justify-center">
-                  <span className="text-6xl font-bold text-navy/30" style={{ fontFamily: 'var(--font-display)' }}>
-                    WA
-                  </span>
-                </div>
+              <div className="relative w-64 h-64 lg:w-80 lg:h-80 rounded-2xl overflow-hidden shadow-card-hover">
+                <Image
+                  src="/images/wessam.png"
+                  alt="Wessam Abdelmajeed — HR Business Partner & Talent Strategist"
+                  fill
+                  className="object-cover object-top"
+                  priority
+                  sizes="(max-width: 1024px) 256px, 320px"
+                />
               </div>
             </div>
 

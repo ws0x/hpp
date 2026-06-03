@@ -25,7 +25,7 @@ export function HeroSection({
   aboutLinkLabel,
 }: HeroProps) {
   return (
-    <section className="relative overflow-hidden bg-surface pt-12 pb-20 lg:pt-20 lg:pb-28">
+    <section className="relative overflow-hidden bg-surface pt-10 pb-16 sm:pt-12 sm:pb-20 lg:pt-20 lg:pb-28">
       {/* Subtle background gradient */}
       <div
         aria-hidden
@@ -37,7 +37,8 @@ export function HeroSection({
       />
 
       <Container>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+        {/* Mobile: portrait first, then copy. Desktop: copy left, portrait right */}
+        <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-8 lg:gap-8 lg:items-center">
           {/* Left — copy */}
           <div className="animate-fade-up">
             <p className="text-sm font-semibold uppercase tracking-widest text-orange mb-4">
@@ -50,7 +51,7 @@ export function HeroSection({
               {headline}
             </h1>
             {subtext && (
-              <p className="text-lg text-text-muted mb-8 max-w-xl leading-relaxed">
+              <p className="text-base sm:text-lg text-text-muted mb-8 max-w-xl leading-relaxed">
                 {subtext}
               </p>
             )}
@@ -67,9 +68,9 @@ export function HeroSection({
           {/* Right — portrait card */}
           <div className="flex justify-center lg:justify-end animate-fade-up delay-200">
             <div className="relative">
-              {/* Portrait */}
+              {/* Portrait — smaller on mobile, larger on desktop */}
               <div
-                className="relative w-64 h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-white mx-auto"
+                className="relative w-52 h-52 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-white mx-auto"
                 style={{ boxShadow: 'var(--shadow-card-hover)' }}
               >
                 {portrait ? (
@@ -82,11 +83,14 @@ export function HeroSection({
                     sizes="(max-width: 768px) 256px, 288px"
                   />
                 ) : (
-                  <div className="w-full h-full bg-blue-light flex items-center justify-center">
-                    <span className="text-5xl font-bold text-navy" style={{ fontFamily: 'var(--font-display)' }}>
-                      WA
-                    </span>
-                  </div>
+                  <Image
+                    src="/images/wessam.png"
+                    alt="Wessam Abdelmajeed — HR Business Partner & Talent Strategist"
+                    fill
+                    className="object-cover object-top"
+                    priority
+                    sizes="(max-width: 768px) 256px, 288px"
+                  />
                 )}
               </div>
 
