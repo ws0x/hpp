@@ -72,7 +72,9 @@ export default buildConfig({
       titleSuffix: '— H++ Admin',
       description: 'H++ Content Management System',
     },
-    components: {},
+    components: {
+      beforeDashboard: ['@/components/admin/BeforeDashboard'],
+    },
     importMap: { baseDir: path.resolve(dirname) },
   },
 

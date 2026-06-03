@@ -7,6 +7,7 @@ export const Leads: CollectionConfig = {
     group: 'Admin',
     defaultColumns: ['name', 'email', 'company', 'status', 'createdAt'],
     description: 'Contact form submissions from the website.',
+    listSearchableFields: ['name', 'email', 'company'],
   },
   access: {
     create: () => true,

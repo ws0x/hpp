@@ -8,6 +8,7 @@ export const Posts: CollectionConfig = {
     group: 'Content',
     defaultColumns: ['title', 'category', '_status', 'publishedAt'],
     description: 'Blog posts shown in the Insights section.',
+    listSearchableFields: ['title', 'excerpt'],
     preview: (doc) => {
       const slug = doc?.slug as string
       if (slug) return `${process.env.NEXT_PUBLIC_SITE_URL}/insights/${slug}`

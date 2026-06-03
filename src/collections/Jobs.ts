@@ -8,6 +8,7 @@ export const Jobs: CollectionConfig = {
     group: 'Careers',
     defaultColumns: ['title', 'employmentType', 'industry', 'isActive', 'applicationDeadline'],
     description: 'Job listings shown in the Careers portal.',
+    listSearchableFields: ['title', 'location'],
     preview: (doc) => {
       const slug = doc?.slug as string
       if (slug) return `${process.env.NEXT_PUBLIC_SITE_URL}/careers/${slug}`
