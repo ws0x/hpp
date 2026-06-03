@@ -1,5 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# Payload SQLite dev database
+payload.db
+payload.db-shm
+payload.db-wal
+
 # dependencies
 /node_modules
 /.pnp

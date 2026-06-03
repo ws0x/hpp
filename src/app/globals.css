@@ -1,26 +1,174 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ── Brand Palette ── */
+  --color-navy:         #1B2B6B;
+  --color-navy-dark:    #142054;
+  --color-navy-light:   #243585;
+  --color-orange:       #F97316;
+  --color-orange-dark:  #EA6C09;
+  --color-orange-light: #FBA150;
+  --color-blue-accent:  #2563EB;
+  --color-blue-light:   #EFF6FF;
+
+  /* ── Neutral Scale ── */
+  --color-surface:      #FFFFFF;
+  --color-surface-alt:  #F8FAFC;
+  --color-surface-card: #FFFFFF;
+  --color-border:       #E2E8F0;
+  --color-border-light: #F1F5F9;
+
+  /* ── Typography ── */
+  --color-text:         #1E293B;
+  --color-text-muted:   #64748B;
+  --color-text-subtle:  #94A3B8;
+  --color-text-inverse: #FFFFFF;
+
+  /* ── Fonts ── */
+  --font-display: 'Plus Jakarta Sans', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-sans:    'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  /* ── Radius ── */
+  --radius-sm:   0.375rem;
+  --radius-md:   0.75rem;
+  --radius-lg:   1rem;
+  --radius-xl:   1.5rem;
+  --radius-full: 9999px;
+
+  /* ── Shadows ── */
+  --shadow-card:       0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05);
+  --shadow-card-hover: 0 10px 25px -5px rgb(27 43 107 / 0.1), 0 4px 10px -5px rgb(27 43 107 / 0.08);
+  --shadow-button:     0 1px 2px 0 rgb(0 0 0 / 0.05);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ── Base layer — overridable by Tailwind utilities ── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-text);
+    background-color: var(--color-surface);
+    line-height: 1.6;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-navy);
+  }
+
+  h1 { font-size: clamp(2.25rem, 5vw, 3.75rem); }
+  h2 { font-size: clamp(1.75rem, 3.5vw, 2.5rem); }
+  h3 { font-size: clamp(1.25rem, 2.5vw, 1.75rem); }
+
+  /* Bare links only — NOT inside utility-classed elements */
+  a:not([class]) {
+    color: var(--color-blue-accent);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  a:not([class]):hover {
+    color: var(--color-navy);
+  }
+
+  /* ── Cursor pointer on ALL interactive elements ── */
+  a,
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"],
+  input[type="checkbox"],
+  input[type="radio"],
+  select,
+  label[for],
+  [tabindex]:not([tabindex="-1"]) {
+    cursor: pointer;
+  }
+
+  [disabled],
+  [aria-disabled="true"] {
+    cursor: not-allowed;
+  }
+
+  /* ── Paragraphs ── */
+  p {
+    color: var(--color-text-muted);
+    max-width: 65ch;
+  }
+
+  /* ── Focus styles (accessibility) ── */
+  :focus-visible {
+    outline: 2px solid var(--color-orange);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* ── Selection ── */
+  ::selection {
+    background-color: var(--color-orange);
+    color: white;
+  }
+
+  /* ── Scroll padding for sticky nav ── */
+  :target {
+    scroll-margin-top: 5rem;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ── Rich text content ── */
+.rich-text h2 { margin-top: 2rem; margin-bottom: 0.75rem; }
+.rich-text h3 { margin-top: 1.5rem; margin-bottom: 0.5rem; }
+.rich-text p  { margin-bottom: 1rem; color: var(--color-text-muted); max-width: none; }
+.rich-text ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
+.rich-text ol { list-style: decimal; padding-left: 1.5rem; margin-bottom: 1rem; }
+.rich-text li { margin-bottom: 0.375rem; color: var(--color-text-muted); }
+.rich-text blockquote {
+  border-left: 4px solid var(--color-orange);
+  padding-left: 1.25rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--color-text);
 }
+.rich-text a {
+  color: var(--color-blue-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ── Utility animations ── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-fade-up { animation: fade-up 0.5s ease both; }
+.animate-fade-in { animation: fade-in 0.4s ease both; }
+
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+
+/* ── Hide scrollbar (category pills) ── */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar { display: none; }
