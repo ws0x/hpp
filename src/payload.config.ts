@@ -1,9 +1,11 @@
 import path from 'path'
 import { fileURLToPath } from 'url'
+import sharp from 'sharp'
 import { buildConfig } from 'payload'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
@@ -30,6 +32,20 @@ const db = process.env.DATABASE_URI
   : sqliteAdapter({ client: { url: 'file:./payload.db' } })
 
 export default buildConfig({
+  sharp,
+
+  plugins: [
+    // Vercel Blob storage — active only when BLOB_READ_WRITE_TOKEN is set (production).
+    // Falls back to local disk in dev (SQLite mode).
+    vercelBlobStorage({
+      enabled: !!process.env.BLOB_READ_WRITE_TOKEN,
+      collections: {
+        media: true,
+      },
+      token: process.env.BLOB_READ_WRITE_TOKEN || '',
+    }),
+  ],
+
   admin: {
     user: Users.slug,
     meta: {
