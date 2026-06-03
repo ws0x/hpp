@@ -24,3 +24,15 @@ index b3d5e60..59f4597 100644
  export const ConfigProvider = ({
    children,
    config: configFromProps
+diff --git a/node_modules/@payloadcms/ui/dist/providers/ServerFunctions/index.js b/node_modules/@payloadcms/ui/dist/providers/ServerFunctions/index.js
+index 037879b..f402736 100644
+--- a/node_modules/@payloadcms/ui/dist/providers/ServerFunctions/index.js
++++ b/node_modules/@payloadcms/ui/dist/providers/ServerFunctions/index.js
+@@ -1,6 +1,6 @@
+ import { jsx as _jsx } from "react/jsx-runtime";
+ import React, { createContext, useCallback } from 'react';
+-export const ServerFunctionsContext = /*#__PURE__*/createContext(undefined);
++export const ServerFunctionsContext = globalThis.__payload_server_functions_ctx__ = globalThis.__payload_server_functions_ctx__ || /*#__PURE__*/createContext(undefined);
+ export const useServerFunctions = () => {
+   const context = React.use(ServerFunctionsContext);
+   if (context === undefined) {
