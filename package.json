@@ -2,12 +2,17 @@
   "name": "hplusplus",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "dev": "next dev --webpack",
-    "build": "patch-package && payload migrate && next build",
+    "build": "patch-package && next build",
     "start": "next start",
     "lint": "eslint",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "migrate": "npx tsx node_modules/payload/bin.js migrate",
+    "migrate:create": "npx tsx node_modules/payload/bin.js migrate:create"
   },
   "dependencies": {
     "@payloadcms/db-postgres": "^3.85.0",
