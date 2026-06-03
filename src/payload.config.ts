@@ -47,14 +47,31 @@ const dirname = path.dirname(filename)
 //    when running on Vercel (VERCEL=1) so dev still hits the direct endpoint.
 //
 function toPoolerUrl(raw: string): string {
-  // Only rewrite on Vercel and only if not already a pooler URL
-  if (!process.env.VERCEL || raw.includes('-pooler.')) return raw
-  // Neon direct:  ep-<name>.<region>.aws.neon.tech
-  // Neon pooler:  ep-<name>-pooler.<region>.aws.neon.tech
-  return raw.replace(
-    /(ep-[^.]+)(\.[\w-]+\.aws\.neon\.tech)/,
-    '$1-pooler$2',
+  // Only rewrite on Vercel, only for Neon URLs, only if not already pooler
+  if (!process.env.VERCEL || !raw.includes('.neon.tech') || raw.includes('-pooler.')) {
+    return raw
+  }
+
+  // Neon connection strings look like:
+  //   postgresql://user:pass@ep-nameless-wave-agdnk37r.c-2.eu-central-1.aws.neon.tech/db
+  // The endpoint ID is always the first segment of the hostname (right after @).
+  // We append -pooler to ONLY that first segment to get PgBouncer's address.
+  //
+  // Previous regex /(ep-[^.]+)(\.[\w-]+\.aws\.neon\.tech)/ was WRONG:
+  //   \.[\w-]+  matches exactly ONE subdomain before .aws.neon.tech
+  //   But Neon regions have TWO: c-2.eu-central-1 → regex never matched.
+  //
+  // Correct: anchor to @ so we touch only the hostname, not query params.
+  // Use callback form — avoids '$1' being misread in some environments
+  let result = raw.replace(/@(ep-[^./]+)\./, (_, ep: string) => `@${ep}-pooler.`)
+
+  // Also strip channel_binding=require — PgBouncer doesn't need it and the
+  // extra TLS negotiation adds hundreds of ms to cold-start SSL handshakes.
+  result = result.replace(/[?&]channel_binding=require/, (m) =>
+    m.startsWith('?') ? '?' : '',
   )
+
+  return result
 }
 
 const rawDatabaseUri = process.env.DATABASE_URI || ''
