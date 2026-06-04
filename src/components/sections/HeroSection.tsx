@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { ArrowRight, CheckCircle2 } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Briefcase, Users, Globe2 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
 import { LinkedInIcon } from '@/components/ui/LinkedInIcon'
@@ -10,6 +10,18 @@ const valueBullets = [
   '10+ years driving strategic HR transformation',
   'Trusted by 50+ organisations across the MENA region',
   'End-to-end expertise: strategy, hiring & culture',
+]
+
+// Left-column trust content — fills visual space and adds keyword-rich copy
+const trustStats = [
+  { icon: Briefcase, value: '10+', label: 'Years of HR Leadership' },
+  { icon: Users,     value: '50+', label: 'Organisations Served' },
+  { icon: Globe2,    value: 'MENA', label: 'Region Coverage' },
+]
+
+const industries = [
+  'Banking & Finance', 'Technology', 'Healthcare',
+  'Retail & FMCG', 'Manufacturing', 'Professional Services',
 ]
 
 type HeroProps = {
@@ -34,7 +46,7 @@ export function HeroSection({
   aboutLinkLabel,
 }: HeroProps) {
   return (
-    <section className="relative overflow-hidden bg-surface pt-8 pb-14 sm:pt-12 sm:pb-20 lg:pt-20 lg:pb-28">
+    <section className="relative overflow-hidden bg-surface pt-6 pb-10 sm:pt-12 sm:pb-20 lg:pt-20 lg:pb-28">
       {/* Subtle background gradient */}
       <div
         aria-hidden
@@ -51,24 +63,54 @@ export function HeroSection({
           - Mobile (flex-col): headline/subtext → portrait → CTAs
           - Desktop (2-col grid): left = headline/subtext, right = portrait + CTAs below
         */}
-        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-8 lg:items-start">
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-5 sm:gap-8 lg:items-start">
 
-          {/* ── Left — headline + subtext only ─────────────────────────── */}
+          {/* ── Left — headline, subtext, trust stats & industries ─────── */}
           <div className="animate-fade-up lg:pt-4">
-            <p className="text-sm font-semibold uppercase tracking-widest text-orange mb-4">
+            <p className="text-sm font-semibold uppercase tracking-widest text-orange mb-3 sm:mb-4">
               HR Business Partner &amp; Talent Strategist
             </p>
             <h1
-              className="text-navy leading-tight mb-6"
+              className="text-navy leading-tight mb-3 sm:mb-6"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               {headline}
             </h1>
             {subtext && (
-              <p className="text-base sm:text-lg text-text-muted max-w-xl leading-relaxed">
+              <p className="text-sm sm:text-base lg:text-lg text-text-muted max-w-xl leading-relaxed">
                 {subtext}
               </p>
             )}
+
+            {/* ── Trust stats — desktop only (hidden on mobile to keep hero compact) ── */}
+            <div className="hidden lg:grid grid-cols-3 gap-4 mt-8 max-w-sm">
+              {trustStats.map(({ icon: Icon, value, label }) => (
+                <div key={label} className="bg-white rounded-xl border border-border p-4 text-center shadow-sm">
+                  <Icon size={18} className="text-orange mx-auto mb-1" aria-hidden />
+                  <p className="text-xl font-extrabold text-navy leading-none" style={{ fontFamily: 'var(--font-display)' }}>
+                    {value}
+                  </p>
+                  <p className="text-xs text-text-muted mt-1 leading-tight">{label}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* ── Industries — desktop only ────────────────────────────────── */}
+            <div className="hidden lg:block mt-6">
+              <p className="text-xs font-semibold uppercase tracking-widest text-text-subtle mb-3">
+                Sectors served
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {industries.map((ind) => (
+                  <span
+                    key={ind}
+                    className="inline-block px-3 py-1 rounded-full bg-blue-light text-navy text-xs font-medium border border-blue-accent/20"
+                  >
+                    {ind}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* ── Right — portrait → name/title → CTAs (mobile: below text, desktop: right col) ── */}
@@ -76,7 +118,7 @@ export function HeroSection({
 
             {/* Portrait */}
             <div
-              className="relative w-52 h-52 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-white"
+              className="relative w-40 h-40 sm:w-60 sm:h-60 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-white"
               style={{ boxShadow: 'var(--shadow-card-hover)' }}
             >
               {portrait ? (
@@ -101,7 +143,7 @@ export function HeroSection({
             </div>
 
             {/* Identity + Value Proposition */}
-            <div className="mt-5 text-center max-w-xs">
+            <div className="mt-3 sm:mt-5 text-center max-w-xs">
               {/* Name & title */}
               <p
                 className="font-bold text-navy text-xl leading-tight"
@@ -114,7 +156,7 @@ export function HeroSection({
               )}
 
               {/* Value proposition bullets */}
-              <ul className="mt-4 space-y-2 text-left" aria-label="Key credentials">
+              <ul className="mt-3 space-y-1.5 text-left" aria-label="Key credentials">
                 {valueBullets.map((bullet) => (
                   <li key={bullet} className="flex items-start gap-2 text-sm text-text-muted leading-snug">
                     <CheckCircle2
@@ -128,7 +170,7 @@ export function HeroSection({
               </ul>
 
               {/* LinkedIn + About links */}
-              <div className="mt-4 flex items-center justify-center gap-4 flex-wrap">
+              <div className="mt-3 flex items-center justify-center gap-4 flex-wrap">
                 <a
                   href={LINKEDIN_URL}
                   target="_blank"
@@ -152,7 +194,7 @@ export function HeroSection({
             </div>
 
             {/* CTAs — always after the portrait on every screen size */}
-            <div className="flex flex-wrap justify-center gap-3 mt-6">
+            <div className="flex flex-wrap justify-center gap-3 mt-4 sm:mt-6">
               <Button href={bookingUrl} variant="primary" size="lg">
                 {primaryCtaLabel}
               </Button>

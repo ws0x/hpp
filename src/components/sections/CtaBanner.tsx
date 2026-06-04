@@ -17,7 +17,7 @@ export function CtaBanner({
   bookingUrl,
 }: CtaBannerProps) {
   return (
-    <section className="py-20 bg-navy relative overflow-hidden">
+    <section className="py-14 sm:py-20 bg-navy relative overflow-hidden">
       {/* Background accent */}
       <div
         aria-hidden
@@ -32,7 +32,7 @@ export function CtaBanner({
         <h2 className="text-white mb-4" style={{ fontFamily: 'var(--font-display)' }}>
           {title}
         </h2>
-        <p className="text-white/70 text-lg mb-10 mx-auto max-w-2xl">
+        <p className="text-white/70 text-base sm:text-lg mb-7 sm:mb-10 mx-auto max-w-2xl">
           {subtitle}
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">

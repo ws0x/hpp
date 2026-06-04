@@ -91,12 +91,12 @@ export default async function AboutPage() {
       </section>
 
       {/* Bio + portrait */}
-      <section className="py-20 bg-white">
+      <section className="py-12 sm:py-16 lg:py-20 bg-white">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-start">
             {/* Portrait */}
             <div className="lg:col-span-2 flex justify-center lg:justify-start">
-              <div className="relative w-64 h-64 lg:w-80 lg:h-80 rounded-2xl overflow-hidden shadow-card-hover">
+              <div className="relative w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 rounded-2xl overflow-hidden shadow-card-hover">
                 <Image
                   src="/images/wessam.png"
                   alt="Wessam Abdelmajeed — HR Business Partner & Talent Strategist"
