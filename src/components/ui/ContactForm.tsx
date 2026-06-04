@@ -148,12 +148,6 @@ export function ContactForm({ source = 'contact' }: { source?: string }) {
       </div>
 
       <SubmitButton />
-
-      <p className="text-xs text-text-subtle text-center">
-        By submitting this form you agree to our{' '}
-        <a href="/privacy" className="underline hover:text-navy">Privacy Policy</a>.
-        Your data is never shared with third parties.
-      </p>
     </form>
   )
 }

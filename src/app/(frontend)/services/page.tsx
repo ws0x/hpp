@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
-import { BarChart3, Search, TrendingUp, GraduationCap, Target, Users, CheckCircle2 } from 'lucide-react'
+import { BarChart3, Search, TrendingUp, GraduationCap, Target, Users, CheckCircle2, ArrowRight } from 'lucide-react'
 import { getPayloadClient } from '@/lib/payload'
 import { Container } from '@/components/ui/Container'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { Button } from '@/components/ui/Button'
 import { CtaBanner } from '@/components/sections/CtaBanner'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Services',
@@ -155,9 +156,13 @@ export default async function ServicesPage() {
                       </ul>
                     )}
 
-                    <Button href={bookingUrl} variant="primary" size="md">
+                    <Link
+                      href={bookingUrl}
+                      className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-navy/30 text-navy text-sm font-semibold bg-transparent hover:bg-navy hover:text-white hover:border-navy transition-all duration-200 group"
+                    >
                       Enquire About This Service
-                    </Button>
+                      <ArrowRight size={14} className="transition-transform duration-200 group-hover:translate-x-0.5" />
+                    </Link>
                   </div>
                 </article>
               )

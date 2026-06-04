@@ -45,7 +45,7 @@ export async function submitLead(
     if (process.env.RESEND_API_KEY) {
       const resend = new Resend(process.env.RESEND_API_KEY)
       const fromEmail = `${process.env.FROM_NAME || 'H++'} <${process.env.FROM_EMAIL || 'noreply@hplusplus.net'}>`
-      const adminEmail = process.env.ADMIN_EMAIL || 'hello@hplusplus.net'
+      const adminEmail = process.env.ADMIN_EMAIL || 'business@hplusplus.com'
 
       await Promise.all([
         resend.emails.send({
@@ -70,7 +70,7 @@ export async function submitLead(
           html: `
             <p>Hi ${name},</p>
             <p>Thank you for getting in touch. I've received your message and will get back to you within 24–48 hours.</p>
-            <p>In the meantime, feel free to connect with me on <a href="https://linkedin.com/in/wessam-abd-el-majeed">LinkedIn</a>.</p>
+            <p>In the meantime, feel free to connect with me on <a href="https://www.linkedin.com/in/wessam-abd-el-majeed/">LinkedIn</a>.</p>
             <br>
             <p>Best regards,</p>
             <p><strong>Wessam Abdelmajeed</strong><br>HR Business Partner & Talent Strategist<br>H++ | Evolving Human Resources</p>

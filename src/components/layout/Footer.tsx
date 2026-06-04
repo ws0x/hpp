@@ -86,12 +86,8 @@ export function Footer({ email, location, linkedin }: FooterProps) {
           </div>
         </div>
 
-        <div className="py-6 border-t border-white/10 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-white/40">
+        <div className="py-6 border-t border-white/10 text-center text-xs text-white/40">
           <p>© {year} H++ — Wessam Abdelmajeed. All rights reserved.</p>
-          <div className="flex gap-4">
-            <Link href="/privacy" className="hover:text-white/70 transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-white/70 transition-colors">Terms</Link>
-          </div>
         </div>
       </Container>
     </footer>

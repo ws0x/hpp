@@ -1,7 +1,16 @@
 import Image from 'next/image'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
+import { LinkedInIcon } from '@/components/ui/LinkedInIcon'
+
+const LINKEDIN_URL = 'https://www.linkedin.com/in/wessam-abd-el-majeed/'
+
+const valueBullets = [
+  '10+ years driving strategic HR transformation',
+  'Trusted by 50+ organisations across the MENA region',
+  'End-to-end expertise: strategy, hiring & culture',
+]
 
 type HeroProps = {
   headline: string
@@ -91,26 +100,55 @@ export function HeroSection({
               )}
             </div>
 
-            {/* Identity card */}
-            <div className="mt-4 text-center">
+            {/* Identity + Value Proposition */}
+            <div className="mt-5 text-center max-w-xs">
+              {/* Name & title */}
               <p
-                className="font-bold text-navy text-lg"
+                className="font-bold text-navy text-xl leading-tight"
                 style={{ fontFamily: 'var(--font-display)' }}
               >
                 Wessam Abdelmajeed
               </p>
               {identityTitle && (
-                <p className="text-sm text-text-muted mt-0.5">{identityTitle}</p>
+                <p className="text-sm font-semibold text-orange mt-1">{identityTitle}</p>
               )}
-              {aboutLinkLabel && (
+
+              {/* Value proposition bullets */}
+              <ul className="mt-4 space-y-2 text-left" aria-label="Key credentials">
+                {valueBullets.map((bullet) => (
+                  <li key={bullet} className="flex items-start gap-2 text-sm text-text-muted leading-snug">
+                    <CheckCircle2
+                      size={15}
+                      className="text-orange flex-shrink-0 mt-0.5"
+                      aria-hidden
+                    />
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
+
+              {/* LinkedIn + About links */}
+              <div className="mt-4 flex items-center justify-center gap-4 flex-wrap">
                 <a
-                  href="/about"
-                  className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-accent hover:text-navy mt-2 transition-colors"
+                  href={LINKEDIN_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-accent hover:text-navy transition-colors"
+                  aria-label="Connect with Wessam on LinkedIn"
                 >
-                  {aboutLinkLabel.replace(/\s*[→»>]+\s*$/, '')}
-                  <ArrowRight size={14} />
+                  <LinkedInIcon size={14} />
+                  LinkedIn
                 </a>
-              )}
+                {aboutLinkLabel && (
+                  <a
+                    href="/about"
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-accent hover:text-navy transition-colors"
+                  >
+                    {aboutLinkLabel.replace(/\s*[→»>]+\s*$/, '')}
+                    <ArrowRight size={14} />
+                  </a>
+                )}
+              </div>
             </div>
 
             {/* CTAs — always after the portrait on every screen size */}

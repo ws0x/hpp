@@ -140,7 +140,7 @@ export default async function HomePage() {
     name: 'Wessam Abdelmajeed',
     jobTitle: 'HR Business Partner & Talent Strategist',
     url: process.env.NEXT_PUBLIC_SITE_URL,
-    sameAs: ['https://linkedin.com/in/wessam-abd-el-majeed'],
+    sameAs: ['https://www.linkedin.com/in/wessam-abd-el-majeed/'],
     worksFor: {
       '@type': 'Organization',
       name: 'H++',

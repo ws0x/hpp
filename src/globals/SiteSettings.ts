@@ -44,7 +44,7 @@ export const SiteSettings: GlobalConfig = {
           name: 'email',
           type: 'email',
           label: 'Contact Email',
-          defaultValue: 'hello@hplusplus.net',
+          defaultValue: 'business@hplusplus.com',
         },
         {
           name: 'phone',
@@ -67,6 +67,7 @@ export const SiteSettings: GlobalConfig = {
           name: 'linkedin',
           type: 'text',
           label: 'LinkedIn Profile URL',
+          defaultValue: 'https://www.linkedin.com/in/wessam-abd-el-majeed/',
         },
         {
           name: 'twitter',

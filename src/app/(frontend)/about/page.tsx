@@ -67,7 +67,7 @@ export default async function AboutPage() {
     name: 'Wessam Abdelmajeed',
     jobTitle: 'HR Business Partner & Talent Strategist',
     url: process.env.NEXT_PUBLIC_SITE_URL,
-    sameAs: ['https://linkedin.com/in/wessam-abd-el-majeed'],
+    sameAs: ['https://www.linkedin.com/in/wessam-abd-el-majeed/'],
   }
 
   return (
@@ -129,10 +129,10 @@ export default async function AboutPage() {
                     Wessam Abdelmajeed is a senior HR Business Partner and Talent Strategist with deep expertise across the MENA region. With a career spanning multiple industries and organisations, Wessam brings a rare combination of strategic vision and operational excellence to every engagement.
                   </p>
                   <p>
-                    His philosophy is simple: great organisations are built by great people, and great people thrive when supported by thoughtful HR systems. Whether restructuring a talent acquisition function, building a learning & development programme from scratch, or advising C-suite leaders on people strategy, Wessam delivers real, measurable impact.
+                    Her philosophy is simple: great organisations are built by great people, and great people thrive when supported by thoughtful HR systems. Whether restructuring a talent acquisition function, building a learning &amp; development programme from scratch, or advising C-suite leaders on people strategy, Wessam delivers real, measurable impact.
                   </p>
                   <p>
-                    Through H++, he offers independent consulting, advisory, and training services to companies that want to evolve their HR from administrative overhead into a genuine competitive advantage.
+                    Through H++, she offers independent consulting, advisory, and training services to companies that want to evolve their HR from administrative overhead into a genuine competitive advantage.
                   </p>
                 </div>
               )}

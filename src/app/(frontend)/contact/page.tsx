@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 }
 
 export default async function ContactPage() {
-  let email = 'hello@hplusplus.net'
+  let email = 'business@hplusplus.com'
   let location = 'MENA Region'
   let linkedin: string | undefined
   let bookingUrl = process.env.NEXT_PUBLIC_BOOKING_URL || '#'

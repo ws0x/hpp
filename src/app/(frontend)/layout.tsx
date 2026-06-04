@@ -131,7 +131,7 @@ const organizationJsonLd = {
       url: siteUrl,
       image: `${siteUrl}/images/wessam.png`,
       worksFor: { '@id': `${siteUrl}/#organization` },
-      sameAs: ['https://linkedin.com/in/wessam-abd-el-majeed'],
+      sameAs: ['https://www.linkedin.com/in/wessam-abd-el-majeed/'],
     },
   ],
 }
