@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { ArrowRight, CheckCircle2, Briefcase, Users, Globe2 } from 'lucide-react'
+import { ArrowRight, CheckCircle2, Briefcase, Users, Globe2, UserCheck } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
 import { LinkedInIcon } from '@/components/ui/LinkedInIcon'
@@ -12,11 +12,12 @@ const valueBullets = [
   'End-to-end expertise: strategy, hiring & culture',
 ]
 
-// Left-column trust content — fills visual space and adds keyword-rich copy
+// Left-column trust stats — 4 cards, desktop-only
 const trustStats = [
-  { icon: Briefcase, value: '10+', label: 'Years of HR Leadership' },
-  { icon: Users,     value: '50+', label: 'Organisations Served' },
-  { icon: Globe2,    value: 'MENA', label: 'Region Coverage' },
+  { icon: Briefcase,  value: '10+',  label: 'Years of HR Leadership' },
+  { icon: Users,      value: '50+',  label: 'Organisations Served' },
+  { icon: UserCheck,  value: '200+', label: 'Candidates Placed' },
+  { icon: Globe2,     value: 'MENA', label: 'Region Coverage' },
 ]
 
 const industries = [
@@ -60,34 +61,64 @@ export function HeroSection({
       <Container>
         {/*
           Layout:
-          - Mobile (flex-col): headline/subtext → portrait → CTAs
-          - Desktop (2-col grid): left = headline/subtext, right = portrait + CTAs below
+          - Mobile  (flex-col):       headline/subtext → portrait → identity → CTAs
+          - Desktop (2-col grid):     left = headline + SEO copy + stats + sectors
+                                      right = portrait + identity + CTAs
+          Both columns are desktop-calibrated to be height-equivalent.
         */}
         <div className="flex flex-col lg:grid lg:grid-cols-2 gap-5 sm:gap-8 lg:items-start">
 
-          {/* ── Left — headline, subtext, trust stats & industries ─────── */}
+          {/* ── LEFT COLUMN ─────────────────────────────────────────────── */}
           <div className="animate-fade-up lg:pt-4">
+
+            {/* Eyebrow */}
             <p className="text-sm font-semibold uppercase tracking-widest text-orange mb-3 sm:mb-4">
               HR Business Partner &amp; Talent Strategist
             </p>
+
+            {/* H1 */}
             <h1
               className="text-navy leading-tight mb-3 sm:mb-6"
               style={{ fontFamily: 'var(--font-display)' }}
             >
               {headline}
             </h1>
+
+            {/* Subtext */}
             {subtext && (
               <p className="text-sm sm:text-base lg:text-lg text-text-muted max-w-xl leading-relaxed">
                 {subtext}
               </p>
             )}
 
-            {/* ── Trust stats — desktop only (hidden on mobile to keep hero compact) ── */}
-            <div className="hidden lg:grid grid-cols-3 gap-4 mt-8 max-w-sm">
+            {/* ── SEO paragraph — desktop only, bridges subtext → proof points ── */}
+            <div className="hidden lg:block mt-5">
+              <p
+                className="text-base font-bold text-navy mb-2"
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
+                A People-First Approach to Organisational Excellence
+              </p>
+              <p className="text-sm text-text-muted leading-relaxed max-w-lg">
+                Wessam partners with leadership teams across the Middle East and North Africa to
+                transform HR into a strategic growth engine — building talent pipelines, redesigning
+                organisational structures, and coaching leaders through high-stakes people decisions
+                that deliver measurable business outcomes.
+              </p>
+            </div>
+
+            {/* ── 4 Trust stat cards — desktop only ────────────────────────── */}
+            <div className="hidden lg:grid grid-cols-4 gap-3 mt-6">
               {trustStats.map(({ icon: Icon, value, label }) => (
-                <div key={label} className="bg-white rounded-xl border border-border p-4 text-center shadow-sm">
-                  <Icon size={18} className="text-orange mx-auto mb-1" aria-hidden />
-                  <p className="text-xl font-extrabold text-navy leading-none" style={{ fontFamily: 'var(--font-display)' }}>
+                <div
+                  key={label}
+                  className="bg-white rounded-xl border border-border p-3.5 text-center shadow-sm"
+                >
+                  <Icon size={18} className="text-orange mx-auto mb-1.5" aria-hidden />
+                  <p
+                    className="text-xl font-extrabold text-navy leading-none"
+                    style={{ fontFamily: 'var(--font-display)' }}
+                  >
                     {value}
                   </p>
                   <p className="text-xs text-text-muted mt-1 leading-tight">{label}</p>
@@ -95,9 +126,9 @@ export function HeroSection({
               ))}
             </div>
 
-            {/* ── Industries — desktop only ────────────────────────────────── */}
-            <div className="hidden lg:block mt-6">
-              <p className="text-xs font-semibold uppercase tracking-widest text-text-subtle mb-3">
+            {/* ── Sectors served — desktop only ────────────────────────────── */}
+            <div className="hidden lg:block mt-5">
+              <p className="text-xs font-semibold uppercase tracking-widest text-text-subtle mb-2.5">
                 Sectors served
               </p>
               <div className="flex flex-wrap gap-2">
@@ -111,10 +142,11 @@ export function HeroSection({
                 ))}
               </div>
             </div>
+
           </div>
 
-          {/* ── Right — portrait → name/title → CTAs (mobile: below text, desktop: right col) ── */}
-          <div className="flex flex-col items-center lg:items-center animate-fade-up delay-200">
+          {/* ── RIGHT COLUMN ────────────────────────────────────────────── */}
+          <div className="flex flex-col items-center animate-fade-up delay-200">
 
             {/* Portrait */}
             <div
@@ -128,7 +160,7 @@ export function HeroSection({
                   fill
                   className="object-cover"
                   priority
-                  sizes="(max-width: 768px) 256px, 288px"
+                  sizes="(max-width: 640px) 160px, (max-width: 1024px) 240px, 288px"
                 />
               ) : (
                 <Image
@@ -137,13 +169,14 @@ export function HeroSection({
                   fill
                   className="object-cover object-top"
                   priority
-                  sizes="(max-width: 768px) 256px, 288px"
+                  sizes="(max-width: 640px) 160px, (max-width: 1024px) 240px, 288px"
                 />
               )}
             </div>
 
-            {/* Identity + Value Proposition */}
+            {/* Identity + value proposition */}
             <div className="mt-3 sm:mt-5 text-center max-w-xs">
+
               {/* Name & title */}
               <p
                 className="font-bold text-navy text-xl leading-tight"
@@ -155,15 +188,11 @@ export function HeroSection({
                 <p className="text-sm font-semibold text-orange mt-1">{identityTitle}</p>
               )}
 
-              {/* Value proposition bullets */}
+              {/* Credential bullets */}
               <ul className="mt-3 space-y-1.5 text-left" aria-label="Key credentials">
                 {valueBullets.map((bullet) => (
                   <li key={bullet} className="flex items-start gap-2 text-sm text-text-muted leading-snug">
-                    <CheckCircle2
-                      size={15}
-                      className="text-orange flex-shrink-0 mt-0.5"
-                      aria-hidden
-                    />
+                    <CheckCircle2 size={15} className="text-orange flex-shrink-0 mt-0.5" aria-hidden />
                     {bullet}
                   </li>
                 ))}
@@ -193,7 +222,7 @@ export function HeroSection({
               </div>
             </div>
 
-            {/* CTAs — always after the portrait on every screen size */}
+            {/* CTAs */}
             <div className="flex flex-wrap justify-center gap-3 mt-4 sm:mt-6">
               <Button href={bookingUrl} variant="primary" size="lg">
                 {primaryCtaLabel}
