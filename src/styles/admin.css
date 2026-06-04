@@ -4,9 +4,7 @@
    Brand: deep navy (#1B2B6B) + orange accent (#F97316) on a light base.
    ========================================================================== */
 
-/* ── Design tokens ─────────────────────────────────────────────────────────
-   Override Payload's own CSS custom properties where it's safe, so the brand
-   flows through components we don't target directly. */
+/* ── Design tokens ─────────────────────────────────────────────────────────*/
 :root {
   --hpp-navy:        #1B2B6B;
   --hpp-navy-dark:   #142054;
@@ -15,16 +13,98 @@
   --hpp-orange-dark: #EA6C09;
   --hpp-blue:        #2563EB;
   --hpp-border:      #e2e8f0;
+  --hpp-surface:     #ffffff;
   --hpp-surface-alt: #f8fafc;
   --hpp-text:        #1e293b;
   --hpp-text-muted:  #64748b;
-
-  /* Payload theme hooks — brand the focus / link accents globally. */
-  --theme-success-500: #1B2B6B;
-  --color-success-500: #1B2B6B;
 }
 
-/* Comfortable base font across the whole admin. */
+/* ============================================================================
+   0. DARK-MODE KILLSWITCH
+   payload.config sets theme: 'light', but if dark-mode leaks in (OS
+   prefers-color-scheme, cached client state, first-paint) we reset every
+   Payload dark-theme variable back to its light-mode value here.
+   ========================================================================== */
+html,
+html[data-theme="dark"],
+html[data-theme="dark"] body {
+  color-scheme: light !important;
+}
+
+/* Override every Payload dark-theme color token back to light values. */
+html[data-theme="dark"] {
+  /* Backgrounds */
+  --color-base-0:   255 255 255 !important; /* white — used for page bg */
+  --color-base-50:  248 250 252 !important; /* surface-alt */
+  --color-base-100: 241 245 249 !important;
+  --color-base-150: 226 232 240 !important;
+  --color-base-200: 203 213 225 !important;
+  --color-base-250: 148 163 184 !important;
+  --color-base-300: 100 116 139 !important; /* muted text */
+  --color-base-400: 71  85  105 !important;
+  --color-base-500: 51  65  85  !important; /* body text range */
+  --color-base-600: 30  41  59  !important;
+  --color-base-700: 15  23  42  !important;
+  --color-base-800: 8   15  30  !important;
+  --color-base-850: 2   6   23  !important;
+  --color-base-900: 0   0   0   !important;
+  /* Ensure form fields are always light */
+  --color-input-bg: 255 255 255 !important;
+}
+
+/* Force the page body background to white in all cases. */
+html[data-theme="dark"] body,
+html[data-theme="dark"] .template-default__wrap,
+html[data-theme="dark"] .render-admin,
+html[data-theme="dark"] .collection-list,
+html[data-theme="dark"] .collection-edit,
+html[data-theme="dark"] .dashboard,
+html[data-theme="dark"] .login,
+html[data-theme="dark"] main,
+html[data-theme="dark"] .gutter {
+  background-color: #fff !important;
+  color: #1e293b !important;
+}
+
+/* Force all headings, labels, text to dark color in dark-mode bleed */
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] label,
+html[data-theme="dark"] .field-label,
+html[data-theme="dark"] .render-title,
+html[data-theme="dark"] .doc-header__title,
+html[data-theme="dark"] .field-description,
+html[data-theme="dark"] .collections__label,
+html[data-theme="dark"] p {
+  color: #1e293b !important;
+}
+html[data-theme="dark"] .field-description,
+html[data-theme="dark"] .field-type .field-description {
+  color: #64748b !important;
+}
+
+/* Force input fields to white with dark text. */
+html[data-theme="dark"] .field-type input:not([type="checkbox"]):not([type="radio"]):not(.rs__input),
+html[data-theme="dark"] .field-type textarea,
+html[data-theme="dark"] .field-type .rs__control,
+html[data-theme="dark"] .field-type select {
+  background-color: #fff !important;
+  color: #1e293b !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Doc controls bar */
+html[data-theme="dark"] .doc-controls,
+html[data-theme="dark"] .app-header,
+html[data-theme="dark"] .list-controls {
+  background-color: #fff !important;
+  border-color: #e2e8f0 !important;
+  color: #1e293b !important;
+}
+
+/* ── Comfortable base font ──────────────────────────────────────────────── */
 body {
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
@@ -49,7 +129,7 @@ body {
   border-bottom: 1px solid #243585 !important;
 }
 
-/* Group labels (Admin / Content / Careers / Settings / Page Content) */
+/* Group labels */
 .nav-group__label {
   color: #93c5fd !important;
   font-size: 10px !important;
@@ -90,7 +170,6 @@ body {
   box-shadow: inset 3px 0 0 var(--hpp-orange) !important;
 }
 
-/* Nav account / log-out controls at the foot of the sidebar */
 .nav__controls,
 .nav__controls a,
 .nav__controls button {
@@ -98,7 +177,7 @@ body {
 }
 
 /* ============================================================================
-   2. APP HEADER (top bar with breadcrumbs + account)
+   2. APP HEADER (top bar)
    ========================================================================== */
 .app-header {
   background: #fff !important;
@@ -123,7 +202,7 @@ body {
 .reset-password {
   background:
     radial-gradient(1200px 600px at 50% -10%, rgba(27, 43, 107, 0.06), transparent),
-    var(--hpp-surface-alt) !important;
+    #f8fafc !important;
   min-height: 100vh;
 }
 
@@ -131,40 +210,13 @@ body {
 .create-first-user .template-minimal__wrap,
 .forgot-password__wrap,
 .reset-password__wrap {
-  background: #fff;
-  border: 1px solid var(--hpp-border);
-  border-radius: 16px;
+  background: #fff !important;
+  border: 1px solid var(--hpp-border) !important;
+  border-radius: 16px !important;
   padding: 40px 36px !important;
-  box-shadow: 0 20px 45px -20px rgba(27, 43, 107, 0.25);
+  box-shadow: 0 20px 45px -20px rgba(27, 43, 107, 0.25) !important;
   max-width: 440px;
   width: 100%;
-}
-
-/* Brand mark above the login form */
-.login__brand,
-.login__wrap > .graphic-icon,
-.login__wrap svg {
-  margin-bottom: 8px;
-}
-
-.login__wrap::before {
-  content: 'H++';
-  display: block;
-  text-align: center;
-  font-size: 34px;
-  font-weight: 800;
-  letter-spacing: -1px;
-  color: var(--hpp-navy);
-  margin-bottom: 2px;
-}
-
-.login__wrap::after {
-  content: 'Evolving Human Resources — Admin';
-  display: block;
-  text-align: center;
-  font-size: 13px;
-  color: var(--hpp-text-muted);
-  margin-bottom: 22px;
 }
 
 /* ============================================================================
@@ -182,10 +234,10 @@ body {
   margin-bottom: 6px !important;
 }
 
-/* Inputs, textareas, selects — clear borders, generous height.
-   `:not(.rs__input)` is critical: react-select renders a hidden internal
+/* Inputs, textareas, selects.
+   `:not(.rs__input)` is critical — react-select renders a hidden internal
    <input class="rs__input"> for typing; styling it as a full field inflates
-   the control and clips the selected value. We style .rs__control instead. */
+   the control height and clips the visible selected value. */
 .field-type input:not([type="checkbox"]):not([type="radio"]):not(.rs__input),
 .field-type textarea,
 .field-type .rs__control,
@@ -208,13 +260,12 @@ input.search-filter__input,
   line-height: 1.55 !important;
 }
 
-.field-type input:hover,
-.field-type textarea:hover,
-.field-type .rs__control:hover {
+.field-type input:hover:not(.rs__input),
+.field-type textarea:hover {
   border-color: #94a3b8 !important;
 }
 
-.field-type input:focus,
+.field-type input:focus:not(.rs__input),
 .field-type textarea:focus,
 .field-type .rs__control--is-focused,
 .field-type select:focus {
@@ -223,11 +274,12 @@ input.search-filter__input,
   outline: none !important;
 }
 
-/* react-select internals */
+/* ── React-select internals ── */
 .rs__control {
   padding: 2px 4px !important;
 }
-/* Reset the hidden typing input so it never grows the control or clips values. */
+
+/* The hidden search input inside react-select must NEVER grow the control. */
 .field-type .rs__input,
 .rs__input {
   min-height: 0 !important;
@@ -235,36 +287,40 @@ input.search-filter__input,
   padding: 0 !important;
   border: 0 !important;
   box-shadow: none !important;
+  background: transparent !important;
 }
+
+/* Ensure the selected value text is always fully visible. */
 .rs__value-container {
-  flex-wrap: nowrap !important;
-}
-.rs__single-value,
-.rs__multi-value {
   overflow: visible !important;
+}
+.rs__single-value {
+  color: var(--hpp-text) !important;
+  overflow: visible !important;
+}
+.rs__placeholder {
+  color: var(--hpp-text-muted) !important;
 }
 .rs__menu {
   border-radius: 10px !important;
   box-shadow: 0 12px 30px -10px rgba(15, 23, 42, 0.25) !important;
   z-index: 50 !important;
+  background: #fff !important;
 }
 .rs__option--is-focused {
   background: #eef2ff !important;
+  color: var(--hpp-text) !important;
 }
 .rs__option--is-selected {
   background: var(--hpp-navy) !important;
+  color: #fff !important;
 }
 
-/* Field descriptions / helper text */
+/* Field helper text */
 .field-description {
   color: var(--hpp-text-muted) !important;
   font-size: 12.5px !important;
   margin-top: 6px !important;
-}
-
-/* Checkboxes */
-.checkbox-input__input {
-  border-radius: 5px !important;
 }
 
 /* Rich text (Lexical) editor frame */
@@ -272,6 +328,7 @@ input.search-filter__input,
 .rich-text {
   border: 1px solid #cbd5e1 !important;
   border-radius: 8px !important;
+  background: #fff !important;
 }
 
 /* ============================================================================
@@ -298,6 +355,7 @@ button[class*="btn--style-primary"] {
 .btn--style-secondary {
   border: 1px solid #cbd5e1 !important;
   color: var(--hpp-navy) !important;
+  background: #fff !important;
 }
 .btn--style-secondary:hover {
   background: var(--hpp-surface-alt) !important;
@@ -305,14 +363,15 @@ button[class*="btn--style-primary"] {
 }
 
 /* ============================================================================
-   6. DOCUMENT (create / edit) HEADER + CONTROLS
+   6. DOCUMENT HEADER + CONTROLS
    ========================================================================== */
 .doc-header,
 .collection-edit .doc-header {
   border-bottom: 1px solid var(--hpp-border) !important;
+  background: #fff !important;
 }
 
-/* Tame the document title — globals.css used to blow this up to ~3rem. */
+/* Keep the document title readable and properly sized */
 .render-title,
 .doc-header__title,
 .collection-edit__header h1 {
@@ -323,7 +382,6 @@ button[class*="btn--style-primary"] {
   line-height: 1.2 !important;
 }
 
-/* Sticky save/publish bar */
 .doc-controls {
   background: #fff !important;
   border-bottom: 1px solid var(--hpp-border) !important;
@@ -339,11 +397,11 @@ button[class*="btn--style-primary"] {
 .dashboard__label,
 .dashboard__group-label,
 .collections__label,
-.dashboard h2.collections__label {
+.dashboard .collections__label {
   color: var(--hpp-text-muted) !important;
   text-transform: uppercase !important;
   letter-spacing: 0.07em !important;
-  font-size: 13px !important;
+  font-size: 12px !important;
   font-weight: 700 !important;
   margin: 22px 0 10px !important;
 }
@@ -368,23 +426,19 @@ button[class*="btn--style-primary"] {
   font-weight: 600 !important;
 }
 
-/* The "+" create button on dashboard cards */
-.dashboard__card .btn,
-.card .doc-tabs__tab {
-  color: var(--hpp-orange) !important;
-}
-
 /* ============================================================================
    8. LIST / TABLE VIEWS
    ========================================================================== */
 .list-controls {
   border-radius: 10px !important;
+  background: var(--hpp-surface-alt) !important;
 }
 
 .table {
   border: 1px solid var(--hpp-border) !important;
   border-radius: 10px !important;
   overflow: hidden !important;
+  background: #fff !important;
 }
 
 .table thead th {
@@ -396,51 +450,42 @@ button[class*="btn--style-primary"] {
   font-weight: 700 !important;
 }
 
-.table tbody .row:hover,
-.table tbody tr:hover {
+.table tbody td {
+  color: var(--hpp-text) !important;
+  background: #fff !important;
+}
+
+.table tbody .row:hover td,
+.table tbody tr:hover td {
   background: var(--hpp-surface-alt) !important;
 }
 
-.cell-_select .checkbox-input {
-  transform: scale(1.05);
-}
-
-/* Status pills */
 .pill {
   border-radius: 999px !important;
   font-weight: 600 !important;
 }
 
-/* Pagination + per-page controls */
-.per-page,
-.paginator {
-  color: var(--hpp-text-muted) !important;
-}
-
 /* ============================================================================
    9. MOBILE RESPONSIVENESS (< 768px)
-   Fix touch targets, overlap, and off-canvas nav so every admin screen works.
    ========================================================================== */
 @media (max-width: 768px) {
-  /* Off-canvas nav: full-height drawer, above content */
+  /* Off-canvas nav drawer */
   .nav {
     width: 84vw !important;
     max-width: 320px !important;
     z-index: 100 !important;
   }
 
-  /* Generous touch targets everywhere */
+  /* Generous touch targets */
   .nav__link,
   .btn,
-  .doc-controls__controls .btn,
-  .pill,
-  a.nav__link {
+  .doc-controls__controls .btn {
     min-height: 44px !important;
     display: flex !important;
     align-items: center !important;
   }
 
-  /* Inputs comfortable for thumbs; 16px font avoids iOS zoom-on-focus */
+  /* 16px avoids iOS zoom-on-focus; NOT applied to .rs__input (would clip values) */
   .field-type input:not([type="checkbox"]):not([type="radio"]):not(.rs__input),
   .field-type textarea,
   .field-type .rs__control,
@@ -449,7 +494,7 @@ button[class*="btn--style-primary"] {
     min-height: 48px !important;
   }
 
-  /* Single-column form fields — kill side-by-side overlap */
+  /* Single-column form fields */
   .field-type {
     width: 100% !important;
     flex: 0 0 100% !important;
@@ -460,11 +505,10 @@ button[class*="btn--style-primary"] {
     flex-direction: column !important;
   }
 
-  /* Document header: stack title and actions instead of cramming them */
+  /* Stack doc header + action bar */
   .doc-header,
   .doc-controls,
-  .doc-controls__wrapper,
-  .collection-edit__header {
+  .doc-controls__wrapper {
     flex-wrap: wrap !important;
     gap: 10px !important;
   }
@@ -477,13 +521,12 @@ button[class*="btn--style-primary"] {
     justify-content: center !important;
   }
   .render-title,
-  .doc-header__title,
-  .collection-edit__header h1 {
+  .doc-header__title {
     font-size: 21px !important;
     word-break: break-word !important;
   }
 
-  /* List view: let wide tables scroll horizontally rather than overflow */
+  /* Horizontal-scroll table on narrow screens */
   .table-wrap,
   .list-controls,
   .collection-list__wrap {
@@ -494,9 +537,8 @@ button[class*="btn--style-primary"] {
     min-width: 560px !important;
   }
 
-  /* List control bar (search + columns + filters) wraps cleanly */
+  /* Search + filter bar wraps cleanly */
   .list-controls__wrap,
-  .list-header,
   .search-filter {
     flex-wrap: wrap !important;
     gap: 8px !important;
@@ -506,7 +548,7 @@ button[class*="btn--style-primary"] {
     width: 100% !important;
   }
 
-  /* Login card fills small screens with breathing room */
+  /* Login card breathes on small screens */
   .login__wrap,
   .create-first-user .template-minimal__wrap {
     padding: 28px 22px !important;
@@ -514,21 +556,20 @@ button[class*="btn--style-primary"] {
     border-radius: 14px !important;
   }
 
-  /* Reduce gutter padding so content isn't squeezed */
+  /* Tighten page gutters */
   .gutter--left,
   .gutter--right {
     padding-left: 16px !important;
     padding-right: 16px !important;
   }
 
-  /* Dashboard cards: comfortable single/double column */
+  /* Dashboard cards: 2-col then 1-col on very small */
   .dashboard__card-list {
     grid-template-columns: 1fr 1fr !important;
     gap: 10px !important;
   }
 }
 
-/* Extra-small phones */
 @media (max-width: 420px) {
   .dashboard__card-list {
     grid-template-columns: 1fr !important;

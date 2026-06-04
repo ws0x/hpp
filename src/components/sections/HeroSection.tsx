@@ -37,10 +37,15 @@ export function HeroSection({
       />
 
       <Container>
-        {/* Mobile: copy first, then portrait below. Desktop: copy left, portrait right */}
-        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-8 lg:items-center">
-          {/* Left — copy */}
-          <div className="animate-fade-up">
+        {/*
+          Layout:
+          - Mobile (flex-col): headline/subtext → portrait → CTAs
+          - Desktop (2-col grid): left = headline/subtext, right = portrait + CTAs below
+        */}
+        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-8 lg:items-start">
+
+          {/* ── Left — headline + subtext only ─────────────────────────── */}
+          <div className="animate-fade-up lg:pt-4">
             <p className="text-sm font-semibold uppercase tracking-widest text-orange mb-4">
               HR Business Partner &amp; Talent Strategist
             </p>
@@ -51,11 +56,65 @@ export function HeroSection({
               {headline}
             </h1>
             {subtext && (
-              <p className="text-base sm:text-lg text-text-muted mb-8 max-w-xl leading-relaxed">
+              <p className="text-base sm:text-lg text-text-muted max-w-xl leading-relaxed">
                 {subtext}
               </p>
             )}
-            <div className="flex flex-wrap gap-3">
+          </div>
+
+          {/* ── Right — portrait → name/title → CTAs (mobile: below text, desktop: right col) ── */}
+          <div className="flex flex-col items-center lg:items-center animate-fade-up delay-200">
+
+            {/* Portrait */}
+            <div
+              className="relative w-52 h-52 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-white"
+              style={{ boxShadow: 'var(--shadow-card-hover)' }}
+            >
+              {portrait ? (
+                <Image
+                  src={portrait.url}
+                  alt={portrait.alt || 'Wessam Abdelmajeed'}
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 768px) 256px, 288px"
+                />
+              ) : (
+                <Image
+                  src="/images/wessam.png"
+                  alt="Wessam Abdelmajeed — HR Business Partner & Talent Strategist"
+                  fill
+                  className="object-cover object-top"
+                  priority
+                  sizes="(max-width: 768px) 256px, 288px"
+                />
+              )}
+            </div>
+
+            {/* Identity card */}
+            <div className="mt-4 text-center">
+              <p
+                className="font-bold text-navy text-lg"
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
+                Wessam Abdelmajeed
+              </p>
+              {identityTitle && (
+                <p className="text-sm text-text-muted mt-0.5">{identityTitle}</p>
+              )}
+              {aboutLinkLabel && (
+                <a
+                  href="/about"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-accent hover:text-navy mt-2 transition-colors"
+                >
+                  {aboutLinkLabel.replace(/\s*[→»>]+\s*$/, '')}
+                  <ArrowRight size={14} />
+                </a>
+              )}
+            </div>
+
+            {/* CTAs — always after the portrait on every screen size */}
+            <div className="flex flex-wrap justify-center gap-3 mt-6">
               <Button href={bookingUrl} variant="primary" size="lg">
                 {primaryCtaLabel}
               </Button>
@@ -63,60 +122,7 @@ export function HeroSection({
                 {secondaryCtaLabel}
               </Button>
             </div>
-          </div>
 
-          {/* Right — portrait card (centered on mobile, right-aligned on desktop) */}
-          <div className="flex justify-center lg:justify-end animate-fade-up delay-200 mt-2 lg:mt-0">
-            <div className="relative">
-              {/* Portrait — smaller on mobile, larger on desktop */}
-              <div
-                className="relative w-52 h-52 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-white mx-auto"
-                style={{ boxShadow: 'var(--shadow-card-hover)' }}
-              >
-                {portrait ? (
-                  <Image
-                    src={portrait.url}
-                    alt={portrait.alt || 'Wessam Abdelmajeed'}
-                    fill
-                    className="object-cover"
-                    priority
-                    sizes="(max-width: 768px) 256px, 288px"
-                  />
-                ) : (
-                  <Image
-                    src="/images/wessam.png"
-                    alt="Wessam Abdelmajeed — HR Business Partner & Talent Strategist"
-                    fill
-                    className="object-cover object-top"
-                    priority
-                    sizes="(max-width: 768px) 256px, 288px"
-                  />
-                )}
-              </div>
-
-              {/* Identity card */}
-              <div className="mt-4 text-center">
-                <p
-                  className="font-bold text-navy text-lg"
-                  style={{ fontFamily: 'var(--font-display)' }}
-                >
-                  Wessam Abdelmajeed
-                </p>
-                {identityTitle && (
-                  <p className="text-sm text-text-muted mt-0.5">{identityTitle}</p>
-                )}
-                {aboutLinkLabel && (
-                  <a
-                    href="/about"
-                    className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-accent hover:text-navy mt-2 transition-colors"
-                  >
-                    {/* Strip any trailing arrow characters the CMS may have stored in the label */}
-                    {aboutLinkLabel.replace(/\s*[→»>]+\s*$/, '')}
-                    <ArrowRight size={14} />
-                  </a>
-                )}
-              </div>
-            </div>
           </div>
         </div>
       </Container>
