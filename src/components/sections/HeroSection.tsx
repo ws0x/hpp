@@ -22,7 +22,7 @@ const trustStats = [
 
 const industries = [
   'Banking & Finance', 'Technology', 'Healthcare',
-  'Retail & FMCG', 'Manufacturing', 'Professional Services',
+  'Retail & FMCG', 'Professional Services',
 ]
 
 type HeroProps = {
