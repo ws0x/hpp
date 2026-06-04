@@ -1,29 +1,79 @@
-/* H++ Admin — brand overrides for Payload CMS */
+/* ============================================================================
+   H++ Admin — brand theme & UX polish for Payload CMS 3.x
+   Loaded after @payloadcms/next/css, so these rules win on equal specificity.
+   Brand: deep navy (#1B2B6B) + orange accent (#F97316) on a light base.
+   ========================================================================== */
 
-/* ── Nav sidebar — navy brand ───────────────────────────────── */
+/* ── Design tokens ─────────────────────────────────────────────────────────
+   Override Payload's own CSS custom properties where it's safe, so the brand
+   flows through components we don't target directly. */
+:root {
+  --hpp-navy:        #1B2B6B;
+  --hpp-navy-dark:   #142054;
+  --hpp-navy-light:  #243585;
+  --hpp-orange:      #F97316;
+  --hpp-orange-dark: #EA6C09;
+  --hpp-blue:        #2563EB;
+  --hpp-border:      #e2e8f0;
+  --hpp-surface-alt: #f8fafc;
+  --hpp-text:        #1e293b;
+  --hpp-text-muted:  #64748b;
+
+  /* Payload theme hooks — brand the focus / link accents globally. */
+  --theme-success-500: #1B2B6B;
+  --color-success-500: #1B2B6B;
+}
+
+/* Comfortable base font across the whole admin. */
+body {
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+/* ============================================================================
+   1. NAV SIDEBAR — navy brand
+   ========================================================================== */
 .nav {
-  background: #1B2B6B !important;
-  border-right: 1px solid #142054 !important;
+  background: var(--hpp-navy) !important;
+  border-right: 1px solid var(--hpp-navy-dark) !important;
 }
 
 .nav__scroll,
-.nav__scroll-content {
-  background: #1B2B6B !important;
+.nav__scroll-content,
+.nav__wrap {
+  background: var(--hpp-navy) !important;
 }
 
-/* Nav header / logo area */
 .nav__header,
 .nav__brand {
-  background: #142054 !important;
+  background: var(--hpp-navy-dark) !important;
   border-bottom: 1px solid #243585 !important;
 }
 
-/* Nav links */
+/* Group labels (Admin / Content / Careers / Settings / Page Content) */
+.nav-group__label {
+  color: #93c5fd !important;
+  font-size: 10px !important;
+  letter-spacing: 0.09em !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  padding: 14px 16px 6px !important;
+}
+
+/* Links */
 .nav a,
 .nav__link,
 .nav-group__toggle,
 .nav-group__indicator {
   color: #cbd5e1 !important;
+}
+
+.nav__link {
+  border-radius: 8px !important;
+  margin: 1px 8px !important;
+  padding: 9px 12px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  transition: background .15s ease, color .15s ease !important;
 }
 
 .nav a:hover,
@@ -36,89 +86,429 @@
 .nav__link--active,
 .nav a[aria-current="page"] {
   color: #fff !important;
-  background: rgba(249, 115, 22, 0.2) !important;
-  border-left: 3px solid #F97316 !important;
+  background: rgba(249, 115, 22, 0.18) !important;
+  box-shadow: inset 3px 0 0 var(--hpp-orange) !important;
 }
 
-/* Nav group labels */
-.nav-group__label {
-  color: #64748b !important;
-  font-size: 10px !important;
-  letter-spacing: 0.08em !important;
-  text-transform: uppercase !important;
-  font-weight: 700 !important;
+/* Nav account / log-out controls at the foot of the sidebar */
+.nav__controls,
+.nav__controls a,
+.nav__controls button {
+  color: #cbd5e1 !important;
 }
 
-/* ── Top action bar / header ─────────────────────────────────── */
+/* ============================================================================
+   2. APP HEADER (top bar with breadcrumbs + account)
+   ========================================================================== */
 .app-header {
-  border-bottom: 1px solid #e2e8f0 !important;
+  background: #fff !important;
+  border-bottom: 1px solid var(--hpp-border) !important;
 }
 
-/* ── Buttons — orange primary ────────────────────────────────── */
+.step-nav,
+.step-nav a {
+  color: var(--hpp-text-muted) !important;
+}
+
+.step-nav a:hover {
+  color: var(--hpp-navy) !important;
+}
+
+/* ============================================================================
+   3. LOGIN / AUTH PAGES
+   ========================================================================== */
+.login,
+.create-first-user,
+.forgot-password,
+.reset-password {
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(27, 43, 107, 0.06), transparent),
+    var(--hpp-surface-alt) !important;
+  min-height: 100vh;
+}
+
+.login__wrap,
+.create-first-user .template-minimal__wrap,
+.forgot-password__wrap,
+.reset-password__wrap {
+  background: #fff;
+  border: 1px solid var(--hpp-border);
+  border-radius: 16px;
+  padding: 40px 36px !important;
+  box-shadow: 0 20px 45px -20px rgba(27, 43, 107, 0.25);
+  max-width: 440px;
+  width: 100%;
+}
+
+/* Brand mark above the login form */
+.login__brand,
+.login__wrap > .graphic-icon,
+.login__wrap svg {
+  margin-bottom: 8px;
+}
+
+.login__wrap::before {
+  content: 'H++';
+  display: block;
+  text-align: center;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--hpp-navy);
+  margin-bottom: 2px;
+}
+
+.login__wrap::after {
+  content: 'Evolving Human Resources — Admin';
+  display: block;
+  text-align: center;
+  font-size: 13px;
+  color: var(--hpp-text-muted);
+  margin-bottom: 22px;
+}
+
+/* ============================================================================
+   4. FORM FIELDS — visible, comfortable, consistent
+   ========================================================================== */
+.field-type {
+  margin-bottom: 20px !important;
+}
+
+.field-label,
+.field-type label {
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  color: var(--hpp-text) !important;
+  margin-bottom: 6px !important;
+}
+
+/* Inputs, textareas, selects — clear borders, generous height */
+.field-type input:not([type="checkbox"]):not([type="radio"]),
+.field-type textarea,
+.field-type .rs__control,
+input.search-filter__input,
+.field-type select,
+.condition__field input,
+.condition__value input {
+  background: #fff !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 8px !important;
+  font-size: 14px !important;
+  color: var(--hpp-text) !important;
+  min-height: 44px !important;
+  padding: 10px 12px !important;
+  transition: border-color .15s ease, box-shadow .15s ease !important;
+}
+
+.field-type textarea {
+  min-height: 110px !important;
+  line-height: 1.55 !important;
+}
+
+.field-type input:hover,
+.field-type textarea:hover,
+.field-type .rs__control:hover {
+  border-color: #94a3b8 !important;
+}
+
+.field-type input:focus,
+.field-type textarea:focus,
+.field-type .rs__control--is-focused,
+.field-type select:focus {
+  border-color: var(--hpp-navy) !important;
+  box-shadow: 0 0 0 3px rgba(27, 43, 107, 0.15) !important;
+  outline: none !important;
+}
+
+/* react-select internals */
+.rs__control {
+  padding: 2px 4px !important;
+}
+.rs__menu {
+  border-radius: 10px !important;
+  box-shadow: 0 12px 30px -10px rgba(15, 23, 42, 0.25) !important;
+  z-index: 50 !important;
+}
+.rs__option--is-focused {
+  background: #eef2ff !important;
+}
+.rs__option--is-selected {
+  background: var(--hpp-navy) !important;
+}
+
+/* Field descriptions / helper text */
+.field-description {
+  color: var(--hpp-text-muted) !important;
+  font-size: 12.5px !important;
+  margin-top: 6px !important;
+}
+
+/* Checkboxes */
+.checkbox-input__input {
+  border-radius: 5px !important;
+}
+
+/* Rich text (Lexical) editor frame */
+.rich-text-lexical,
+.rich-text {
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 8px !important;
+}
+
+/* ============================================================================
+   5. BUTTONS
+   ========================================================================== */
+.btn {
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  min-height: 42px !important;
+}
+
 .btn--style-primary,
-.btn[class*="--style-primary"],
 button[class*="btn--style-primary"] {
-  background: #F97316 !important;
-  border-color: #F97316 !important;
+  background: var(--hpp-orange) !important;
+  border-color: var(--hpp-orange) !important;
   color: #fff !important;
 }
 
 .btn--style-primary:hover {
-  background: #EA6C09 !important;
-  border-color: #EA6C09 !important;
+  background: var(--hpp-orange-dark) !important;
+  border-color: var(--hpp-orange-dark) !important;
 }
 
-/* ── Links — blue accent ─────────────────────────────────────── */
-a:not(.nav a):not(.nav__link):not([style]) {
-  color: #2563EB;
+.btn--style-secondary {
+  border: 1px solid #cbd5e1 !important;
+  color: var(--hpp-navy) !important;
+}
+.btn--style-secondary:hover {
+  background: var(--hpp-surface-alt) !important;
+  border-color: var(--hpp-navy) !important;
 }
 
-/* ── Collection list — cleaner cards ───────────────────────────  */
-.list-controls {
-  border-radius: 8px !important;
+/* ============================================================================
+   6. DOCUMENT (create / edit) HEADER + CONTROLS
+   ========================================================================== */
+.doc-header,
+.collection-edit .doc-header {
+  border-bottom: 1px solid var(--hpp-border) !important;
 }
 
-.row:hover {
-  background: #f8fafc !important;
+/* Tame the document title — globals.css used to blow this up to ~3rem. */
+.render-title,
+.doc-header__title,
+.collection-edit__header h1 {
+  font-size: 26px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  color: var(--hpp-navy) !important;
+  line-height: 1.2 !important;
 }
 
-/* ── Dashboard tiles (default Payload cards) ─────────────────── */
-.dashboard__card-link {
-  border-radius: 10px !important;
-  border: 1px solid #e2e8f0 !important;
-  transition: box-shadow 0.15s, transform 0.15s !important;
-}
-
-.dashboard__card-link:hover {
-  box-shadow: 0 8px 20px rgba(27, 43, 107, 0.1) !important;
-  transform: translateY(-2px) !important;
-  border-color: #1B2B6B !important;
-}
-
-/* ── Form fields ─────────────────────────────────────────────── */
-.field-type.text input,
-.field-type.email input,
-.field-type.textarea textarea,
-.field-type.number input,
-select {
-  border-radius: 6px !important;
-}
-
-.field-type.text input:focus,
-.field-type.email input:focus,
-.field-type.textarea textarea:focus {
-  border-color: #1B2B6B !important;
-  box-shadow: 0 0 0 2px rgba(27, 43, 107, 0.15) !important;
-}
-
-/* ── Status / publish bar ────────────────────────────────────── */
+/* Sticky save/publish bar */
 .doc-controls {
-  border-top: 1px solid #e2e8f0 !important;
+  background: #fff !important;
+  border-bottom: 1px solid var(--hpp-border) !important;
 }
 
-/* ── Responsive: hide non-essential sidebar text on small screens  */
+.doc-controls__controls {
+  gap: 8px !important;
+}
+
+/* ============================================================================
+   7. DASHBOARD
+   ========================================================================== */
+.dashboard__label,
+.dashboard__group-label {
+  color: var(--hpp-text-muted) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
+
+.dashboard__card,
+.card {
+  border: 1px solid var(--hpp-border) !important;
+  border-radius: 12px !important;
+  background: #fff !important;
+  transition: box-shadow .15s ease, transform .15s ease, border-color .15s ease !important;
+}
+
+.dashboard__card:hover,
+.card:hover {
+  box-shadow: 0 12px 26px -12px rgba(27, 43, 107, 0.22) !important;
+  transform: translateY(-2px) !important;
+  border-color: var(--hpp-navy) !important;
+}
+
+.card__title {
+  color: var(--hpp-navy) !important;
+  font-weight: 600 !important;
+}
+
+/* The "+" create button on dashboard cards */
+.dashboard__card .btn,
+.card .doc-tabs__tab {
+  color: var(--hpp-orange) !important;
+}
+
+/* ============================================================================
+   8. LIST / TABLE VIEWS
+   ========================================================================== */
+.list-controls {
+  border-radius: 10px !important;
+}
+
+.table {
+  border: 1px solid var(--hpp-border) !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+}
+
+.table thead th {
+  background: var(--hpp-surface-alt) !important;
+  color: var(--hpp-text-muted) !important;
+  font-size: 12px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  font-weight: 700 !important;
+}
+
+.table tbody .row:hover,
+.table tbody tr:hover {
+  background: var(--hpp-surface-alt) !important;
+}
+
+.cell-_select .checkbox-input {
+  transform: scale(1.05);
+}
+
+/* Status pills */
+.pill {
+  border-radius: 999px !important;
+  font-weight: 600 !important;
+}
+
+/* Pagination + per-page controls */
+.per-page,
+.paginator {
+  color: var(--hpp-text-muted) !important;
+}
+
+/* ============================================================================
+   9. MOBILE RESPONSIVENESS (< 768px)
+   Fix touch targets, overlap, and off-canvas nav so every admin screen works.
+   ========================================================================== */
 @media (max-width: 768px) {
+  /* Off-canvas nav: full-height drawer, above content */
   .nav {
+    width: 84vw !important;
+    max-width: 320px !important;
+    z-index: 100 !important;
+  }
+
+  /* Generous touch targets everywhere */
+  .nav__link,
+  .btn,
+  .doc-controls__controls .btn,
+  .pill,
+  a.nav__link {
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  /* Inputs comfortable for thumbs; 16px font avoids iOS zoom-on-focus */
+  .field-type input:not([type="checkbox"]):not([type="radio"]),
+  .field-type textarea,
+  .field-type .rs__control,
+  .field-type select {
+    font-size: 16px !important;
+    min-height: 48px !important;
+  }
+
+  /* Single-column form fields — kill side-by-side overlap */
+  .field-type {
     width: 100% !important;
+    flex: 0 0 100% !important;
+    margin-bottom: 18px !important;
+  }
+  .render-fields,
+  .document-fields__fields {
+    flex-direction: column !important;
+  }
+
+  /* Document header: stack title and actions instead of cramming them */
+  .doc-header,
+  .doc-controls,
+  .doc-controls__wrapper,
+  .collection-edit__header {
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+  }
+  .doc-controls__controls {
+    flex-wrap: wrap !important;
+    width: 100% !important;
+  }
+  .doc-controls__controls .btn {
+    flex: 1 1 auto !important;
+    justify-content: center !important;
+  }
+  .render-title,
+  .doc-header__title,
+  .collection-edit__header h1 {
+    font-size: 21px !important;
+    word-break: break-word !important;
+  }
+
+  /* List view: let wide tables scroll horizontally rather than overflow */
+  .table-wrap,
+  .list-controls,
+  .collection-list__wrap {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .table {
+    min-width: 560px !important;
+  }
+
+  /* List control bar (search + columns + filters) wraps cleanly */
+  .list-controls__wrap,
+  .list-header,
+  .search-filter {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+  .search-filter,
+  .search-filter__input {
+    width: 100% !important;
+  }
+
+  /* Login card fills small screens with breathing room */
+  .login__wrap,
+  .create-first-user .template-minimal__wrap {
+    padding: 28px 22px !important;
+    margin: 16px !important;
+    border-radius: 14px !important;
+  }
+
+  /* Reduce gutter padding so content isn't squeezed */
+  .gutter--left,
+  .gutter--right {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* Dashboard cards: comfortable single/double column */
+  .dashboard__card-list {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+  }
+}
+
+/* Extra-small phones */
+@media (max-width: 420px) {
+  .dashboard__card-list {
+    grid-template-columns: 1fr !important;
   }
 }

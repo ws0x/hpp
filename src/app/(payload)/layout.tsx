@@ -16,6 +16,13 @@
 import { RootLayout, handleServerFunctions } from '@payloadcms/next/layouts'
 import React from 'react'
 
+// Payload's complete admin stylesheet. Without this import the entire admin
+// panel renders as unstyled HTML (nav items run together, forms/login lose all
+// layout). This MUST stay — it is the foundation of the admin UI.
+import '@payloadcms/next/css'
+// H++ brand overrides layered on top of Payload's base styles.
+import '@/styles/admin.css'
+
 import config from '@payload-config'
 import { importMap } from './admin/importMap.js'
 
