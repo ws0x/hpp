@@ -68,6 +68,9 @@ export default buildConfig({
 
   admin: {
     user: Users.slug,
+    // Lock the admin to light mode so the navy + orange brand reads correctly
+    // and the experience is consistent regardless of the operator's OS theme.
+    theme: 'light',
     meta: {
       titleSuffix: '— H++ Admin',
       description: 'H++ Content Management System',

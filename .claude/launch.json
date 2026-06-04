@@ -6,6 +6,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev", "--", "--port", "3006"],
       "port": 3006
+    },
+    {
+      "name": "hplusplus-start",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["next", "start", "--port", "3008"],
+      "port": 3008
     }
   ]
 }

@@ -182,8 +182,11 @@ body {
   margin-bottom: 6px !important;
 }
 
-/* Inputs, textareas, selects — clear borders, generous height */
-.field-type input:not([type="checkbox"]):not([type="radio"]),
+/* Inputs, textareas, selects — clear borders, generous height.
+   `:not(.rs__input)` is critical: react-select renders a hidden internal
+   <input class="rs__input"> for typing; styling it as a full field inflates
+   the control and clips the selected value. We style .rs__control instead. */
+.field-type input:not([type="checkbox"]):not([type="radio"]):not(.rs__input),
 .field-type textarea,
 .field-type .rs__control,
 input.search-filter__input,
@@ -223,6 +226,22 @@ input.search-filter__input,
 /* react-select internals */
 .rs__control {
   padding: 2px 4px !important;
+}
+/* Reset the hidden typing input so it never grows the control or clips values. */
+.field-type .rs__input,
+.rs__input {
+  min-height: 0 !important;
+  height: auto !important;
+  padding: 0 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.rs__value-container {
+  flex-wrap: nowrap !important;
+}
+.rs__single-value,
+.rs__multi-value {
+  overflow: visible !important;
 }
 .rs__menu {
   border-radius: 10px !important;
@@ -318,12 +337,15 @@ button[class*="btn--style-primary"] {
    7. DASHBOARD
    ========================================================================== */
 .dashboard__label,
-.dashboard__group-label {
+.dashboard__group-label,
+.collections__label,
+.dashboard h2.collections__label {
   color: var(--hpp-text-muted) !important;
   text-transform: uppercase !important;
-  letter-spacing: 0.06em !important;
-  font-size: 12px !important;
+  letter-spacing: 0.07em !important;
+  font-size: 13px !important;
   font-weight: 700 !important;
+  margin: 22px 0 10px !important;
 }
 
 .dashboard__card,
@@ -419,7 +441,7 @@ button[class*="btn--style-primary"] {
   }
 
   /* Inputs comfortable for thumbs; 16px font avoids iOS zoom-on-focus */
-  .field-type input:not([type="checkbox"]):not([type="radio"]),
+  .field-type input:not([type="checkbox"]):not([type="radio"]):not(.rs__input),
   .field-type textarea,
   .field-type .rs__control,
   .field-type select {
