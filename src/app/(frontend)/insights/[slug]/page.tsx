@@ -156,7 +156,7 @@ export default async function InsightPost({ params }: Props) {
 
           {/* Meta */}
           <div className="flex flex-wrap items-center gap-4 text-sm text-text-subtle mb-4">
-            <span className="bg-orange text-white text-xs font-semibold px-2.5 py-1 rounded-full">
+            <span className="bg-teal text-white text-xs font-semibold px-2.5 py-1 rounded-full">
               {categoryLabels[post.category] ?? post.category}
             </span>
             {post.publishedAt && (

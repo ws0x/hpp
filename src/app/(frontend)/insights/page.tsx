@@ -142,7 +142,7 @@ export default async function InsightsPage() {
                       </div>
                     )}
                     <div className="absolute top-3 left-3">
-                      <span className="bg-orange text-white text-xs font-semibold px-2.5 py-1 rounded-full">
+                      <span className="bg-teal text-white text-xs font-semibold px-2.5 py-1 rounded-full">
                         {categoryLabels[post.category] ?? post.category}
                       </span>
                     </div>

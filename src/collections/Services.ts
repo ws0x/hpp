@@ -41,6 +41,13 @@ export const Services: CollectionConfig = {
       label: 'Icon',
       required: true,
       options: [
+        // Core solutions — the `value` is also the slug used for /services#<value> anchors.
+        { label: 'Growth Readiness Diagnostic', value: 'growth-readiness' },
+        { label: 'Fractional CHRO', value: 'fractional-chro' },
+        { label: 'Organizational Design', value: 'org-design' },
+        { label: 'Leadership Advisory', value: 'leadership-advisory' },
+        { label: 'Executive Search', value: 'executive-search' },
+        // Legacy / general
         { label: 'HR Consulting', value: 'hr-consulting' },
         { label: 'Recruitment', value: 'recruitment' },
         { label: 'Organizational Development', value: 'org-development' },
@@ -48,7 +55,7 @@ export const Services: CollectionConfig = {
         { label: 'Strategy', value: 'strategy' },
         { label: 'People', value: 'people' },
       ],
-      defaultValue: 'hr-consulting',
+      defaultValue: 'growth-readiness',
     },
     {
       name: 'highlights',

@@ -3,47 +3,48 @@ import { getPayloadClient } from '@/lib/payload'
 import { HeroSection } from '@/components/sections/HeroSection'
 import { StatsBar } from '@/components/sections/StatsBar'
 import { ServicesGrid } from '@/components/sections/ServicesGrid'
+import { MethodologySection } from '@/components/sections/MethodologySection'
 import { WhySection } from '@/components/sections/WhySection'
+import { UseCasesSection, type UseCase } from '@/components/sections/UseCasesSection'
 import { InsightsTeaser } from '@/components/sections/InsightsTeaser'
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection'
-import { NewsletterSection } from '@/components/sections/NewsletterSection'
+import { ClientLogosStrip } from '@/components/sections/ClientLogosStrip'
 import { CtaBanner } from '@/components/sections/CtaBanner'
 
 export const metadata: Metadata = {
-  title: 'H++ | Evolving Human Resources',
+  title: 'H++ | Building Organizations Ready for Growth',
   description:
-    'Wessam Abdelmajeed — HR Business Partner & Talent Strategist. Innovative HR consulting, recruitment, and advisory solutions across the MENA region.',
+    'H++ is a strategic people consulting firm helping scaling businesses build scalable organizations, stronger leadership teams, and high-performing workforces across the MENA region.',
 }
 
 const defaultHero = {
-  headline: 'Evolving Human Resources',
+  headline: 'Building Organizations Ready for Growth',
   subtext:
-    'Empowering organisations to grow through people. Innovative HR solutions, tailored strategies, and real impact — all in one place.',
-  primaryCtaLabel: "Let's Connect",
-  secondaryCtaLabel: 'View My Services',
-  identityTitle: 'HR Business Partner and Talent Strategist',
-  aboutLinkLabel: 'Read More About Me',
+    'Strategic people consulting that helps scaling businesses unlock potential, build strong leadership, and create high-performing organizations.',
+  primaryCtaLabel: 'Get Your Growth Readiness Assessment',
+  secondaryCtaLabel: 'Our Solutions',
 }
 
 const defaultWhyPoints = [
-  'Human-first, business-minded',
-  'Proven track record across MENA',
-  'Strategic, not transactional',
-  'Passionate about sustainable HR',
+  'We diagnose root causes, not just symptoms',
+  'Senior advisors with deep MENA market experience',
+  'Strategic partnership — not transactional hiring',
+  'Solutions built to scale with your business',
 ]
 
 const defaultServices = [
-  { id: '1', title: 'HR Consulting & Advisory',         shortDescription: 'Strategic HR frameworks that align people, culture, and business objectives.', icon: 'hr-consulting' },
-  { id: '2', title: 'Recruitment & Talent Acquisition', shortDescription: 'End-to-end hiring that attracts and retains the right people at every level.',  icon: 'recruitment' },
-  { id: '3', title: 'Organisational Development',       shortDescription: 'Build adaptive, high-performance structures that scale with your ambitions.',    icon: 'org-development' },
-  { id: '4', title: 'Training & Employee Experience',   shortDescription: 'Learning programmes and culture initiatives that develop and retain talent.',     icon: 'training' },
+  { id: '1', title: 'Growth Readiness Diagnostic™',      shortDescription: "A comprehensive assessment that reveals your organization's strengths, risks, and growth opportunities.", icon: 'growth-readiness' },
+  { id: '2', title: 'Fractional CHRO™',                  shortDescription: 'Executive HR leadership and strategic advisory without the cost of a full-time CHRO.',                     icon: 'fractional-chro' },
+  { id: '3', title: 'Organizational Design',             shortDescription: 'Build scalable structures, clear roles, and effective operating models that support growth.',            icon: 'org-design' },
+  { id: '4', title: 'Leadership Advisory',               shortDescription: 'Develop strong leaders and aligned teams that drive performance and results.',                           icon: 'leadership-advisory' },
+  { id: '5', title: 'Executive Search',                  shortDescription: 'Attract and secure exceptional leaders for the roles that matter most.',                                icon: 'executive-search' },
 ]
 
 const defaultStats = [
-  { value: '10+',  label: 'Years Experience' },
-  { value: '50+',  label: 'Companies Served' },
-  { value: '200+', label: 'Candidates Placed' },
-  { value: 'MENA', label: 'Region Coverage' },
+  { value: '10+',  label: 'Years of Experience' },
+  { value: '50+',  label: 'Organizations Served' },
+  { value: 'MENA', label: 'Regional Coverage' },
+  { value: '30K+', label: 'Professional Network' },
 ]
 
 export default async function HomePage() {
@@ -54,6 +55,8 @@ export default async function HomePage() {
   let showStats   = true
   let testimonials: Parameters<typeof TestimonialsSection>[0]['testimonials'] = []
   let posts:        Parameters<typeof InsightsTeaser>[0]['posts']             = []
+  let useCases:     UseCase[]                                                 = []
+  let logos:        Parameters<typeof ClientLogosStrip>[0]['logos']           = []
   let bookingUrl  = process.env.NEXT_PUBLIC_BOOKING_URL || '/contact'
 
   try {
@@ -65,7 +68,7 @@ export default async function HomePage() {
         payload.findGlobal({ slug: 'about-content' }),
         payload.findGlobal({ slug: 'site-settings' }),
         payload.findGlobal({ slug: 'stats-content' }),
-        payload.find({ collection: 'services',     where: { isActive: { equals: true } }, sort: 'order',        limit: 4  }),
+        payload.find({ collection: 'services',     where: { isActive: { equals: true } }, sort: 'order',        limit: 5  }),
         payload.find({ collection: 'testimonials', where: { isActive: { equals: true } }, sort: 'order',        limit: 3  }),
         payload.find({ collection: 'posts',        where: { _status: { equals: 'published' } }, sort: '-publishedAt', limit: 3, depth: 1 }),
       ])
@@ -76,8 +79,6 @@ export default async function HomePage() {
         subtext:           (heroData.subtext  as string)          || defaultHero.subtext,
         primaryCtaLabel:   (heroData.primaryCtaLabel as string)   || defaultHero.primaryCtaLabel,
         secondaryCtaLabel: (heroData.secondaryCtaLabel as string) || defaultHero.secondaryCtaLabel,
-        identityTitle:     (heroData.identityTitle as string)     || defaultHero.identityTitle,
-        aboutLinkLabel:    (heroData.aboutLinkLabel as string)    || defaultHero.aboutLinkLabel,
       }
     }
 
@@ -130,52 +131,61 @@ export default async function HomePage() {
           : null,
       }))
     }
+
+    // Optional collections — tolerate absence so the page still renders.
+    try {
+      const useCasesData = await payload.find({
+        collection: 'use-cases', where: { isActive: { equals: true } }, sort: 'order', limit: 3,
+      })
+      if (useCasesData.docs.length) {
+        useCases = useCasesData.docs.map((u) => ({
+          id:        u.id as string,
+          title:     u.title as string,
+          industry:  u.industry as string | undefined,
+          challenge: u.challenge as string,
+          result:    u.result as string,
+          icon:      u.icon as string | undefined,
+        }))
+      }
+    } catch { /* collection not migrated yet */ }
+
+    try {
+      const logosData = await payload.find({
+        collection: 'client-logos', where: { isActive: { equals: true } }, sort: 'order', limit: 12, depth: 1,
+      })
+      if (logosData.docs.length) {
+        logos = logosData.docs.map((l) => ({
+          id:   l.id as string,
+          name: l.name as string,
+          logo: l.logo && typeof l.logo === 'object' && 'url' in l.logo
+            ? { url: (l.logo as { url: string }).url, alt: (l.logo as { alt?: string }).alt }
+            : null,
+        }))
+      }
+    } catch { /* collection not migrated yet */ }
   } catch {
     // CMS not connected — render with defaults
   }
 
-  const personJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Person',
-    name: 'Wessam Abdelmajeed',
-    jobTitle: 'HR Business Partner & Talent Strategist',
-    url: process.env.NEXT_PUBLIC_SITE_URL,
-    sameAs: ['https://www.linkedin.com/in/wessam-abd-el-majeed/'],
-    worksFor: {
-      '@type': 'Organization',
-      name: 'H++',
-      url: process.env.NEXT_PUBLIC_SITE_URL,
-    },
-    description:
-      'Senior HR Business Partner and Talent Strategist with proven track record across the MENA region.',
-  }
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd).replace(/</g, '\\u003c') }}
-      />
-
-      <HeroSection
-        {...hero}
-        portrait={{ url: '/images/wessam.png', alt: 'Wessam Abdelmajeed' }}
-        bookingUrl={bookingUrl}
-      />
+      <HeroSection {...hero} bookingUrl={bookingUrl} />
 
       {showStats && <StatsBar stats={stats} />}
 
       <ServicesGrid services={services} />
 
+      <MethodologySection />
+
       <WhySection points={whyPoints} />
 
+      <UseCasesSection useCases={useCases} />
+
+      {testimonials.length > 0 && <TestimonialsSection testimonials={testimonials} />}
+
+      <ClientLogosStrip logos={logos} />
+
       <InsightsTeaser posts={posts} />
-
-      {testimonials.length > 0 && (
-        <TestimonialsSection testimonials={testimonials} />
-      )}
-
-      <NewsletterSection />
 
       <CtaBanner bookingUrl={bookingUrl} />
     </>

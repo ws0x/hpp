@@ -1,15 +1,22 @@
 @import "tailwindcss";
 
 @theme {
-  /* ── Brand Palette ── */
-  --color-navy:         #1B2B6B;
-  --color-navy-dark:    #142054;
-  --color-navy-light:   #243585;
-  --color-orange:       #F97316;
-  --color-orange-dark:  #EA6C09;
-  --color-orange-light: #FBA150;
-  --color-blue-accent:  #2563EB;
-  --color-blue-light:   #EFF6FF;
+  /* ── Brand Palette — H++ Strategic People Consulting ──
+     Navy + Teal + Violet. "McKinsey + AI startup + people consulting". */
+  --color-navy:         #0B132B;  /* Primary Navy   */
+  --color-navy-dark:    #060B18;  /* Deepest shade  */
+  --color-navy-light:   #1C2541;  /* Deep Navy      */
+
+  /* Accent family — H++ Teal (utilities read `teal`, e.g. text-teal). */
+  --color-teal:         #00C2A8;  /* H++ Teal       */
+  --color-teal-dark:    #00A892;  /* Hover/active   */
+  --color-teal-light:   #2DE2D1;  /* Bright Teal    */
+
+  --color-violet:       #7B61FF;  /* Premium Violet */
+
+  /* Secondary accent aliases — links & soft chips read teal. */
+  --color-blue-accent:  #00C2A8;
+  --color-blue-light:   #E6FAF6;  /* light teal tint */
 
   /* ── Neutral Scale ── */
   --color-surface:      #FFFFFF;
@@ -25,7 +32,7 @@
   --color-text-inverse: #FFFFFF;
 
   /* ── Fonts ── */
-  --font-display: 'Plus Jakarta Sans', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Manrope', 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-sans:    'Inter', ui-sans-serif, system-ui, sans-serif;
 
   /* ── Radius ── */
@@ -37,7 +44,7 @@
 
   /* ── Shadows ── */
   --shadow-card:       0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05);
-  --shadow-card-hover: 0 10px 25px -5px rgb(27 43 107 / 0.1), 0 4px 10px -5px rgb(27 43 107 / 0.08);
+  --shadow-card-hover: 0 12px 28px -6px rgb(11 19 43 / 0.12), 0 4px 10px -5px rgb(11 19 43 / 0.08);
   --shadow-button:     0 1px 2px 0 rgb(0 0 0 / 0.05);
 }
 
@@ -62,9 +69,9 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    font-weight: 700;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
     color: var(--color-navy);
   }
 
@@ -74,7 +81,7 @@
 
   /* Bare links only — NOT inside utility-classed elements */
   a:not([class]) {
-    color: var(--color-blue-accent);
+    color: var(--color-teal);
     text-decoration: none;
     transition: color 0.2s ease;
   }
@@ -111,21 +118,33 @@
 
   /* ── Focus styles (accessibility) ── */
   :focus-visible {
-    outline: 2px solid var(--color-orange);
+    outline: 2px solid var(--color-teal);
     outline-offset: 3px;
     border-radius: 4px;
   }
 
   /* ── Selection ── */
   ::selection {
-    background-color: var(--color-orange);
-    color: white;
+    background-color: var(--color-teal);
+    color: var(--color-navy);
   }
 
   /* ── Scroll padding for sticky nav ── */
   :target {
     scroll-margin-top: 5rem;
   }
+}
+
+/* ── Brand utilities ── */
+/* Official gradient: navy → deep navy → teal */
+.bg-brand-gradient {
+  background-image: linear-gradient(135deg, #0B132B 0%, #1C2541 50%, #00C2A8 100%);
+}
+.text-gradient {
+  background-image: linear-gradient(120deg, var(--color-teal-light) 0%, var(--color-teal) 60%, var(--color-violet) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 /* ── Rich text content ── */
@@ -136,14 +155,14 @@
 .rich-text ol { list-style: decimal; padding-left: 1.5rem; margin-bottom: 1rem; }
 .rich-text li { margin-bottom: 0.375rem; color: var(--color-text-muted); }
 .rich-text blockquote {
-  border-left: 4px solid var(--color-orange);
+  border-left: 4px solid var(--color-teal);
   padding-left: 1.25rem;
   margin: 1.5rem 0;
   font-style: italic;
   color: var(--color-text);
 }
 .rich-text a {
-  color: var(--color-blue-accent);
+  color: var(--color-teal);
   text-decoration: underline;
   text-underline-offset: 2px;
 }

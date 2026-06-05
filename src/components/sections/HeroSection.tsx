@@ -1,29 +1,6 @@
-import Image from 'next/image'
-import { ArrowRight, CheckCircle2, Briefcase, Users, Globe2, UserCheck } from 'lucide-react'
+import { ArrowRight, TrendingUp, Users, Building2, Target } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
-import { LinkedInIcon } from '@/components/ui/LinkedInIcon'
-
-const LINKEDIN_URL = 'https://www.linkedin.com/in/wessam-abd-el-majeed/'
-
-const valueBullets = [
-  '10+ years driving strategic HR transformation',
-  'Trusted by 50+ organisations across the MENA region',
-  'End-to-end expertise: strategy, hiring & culture',
-]
-
-// Left-column trust stats — 4 cards, desktop-only
-const trustStats = [
-  { icon: Briefcase,  value: '10+',  label: 'Years of HR Leadership' },
-  { icon: Users,      value: '50+',  label: 'Organisations Served' },
-  { icon: UserCheck,  value: '200+', label: 'Candidates Placed' },
-  { icon: Globe2,     value: 'MENA', label: 'Region Coverage' },
-]
-
-const industries = [
-  'Banking & Finance', 'Technology', 'Healthcare',
-  'Retail & FMCG', 'Professional Services',
-]
 
 type HeroProps = {
   headline: string
@@ -31,10 +8,16 @@ type HeroProps = {
   primaryCtaLabel: string
   secondaryCtaLabel: string
   bookingUrl: string
-  portrait?: { url: string; alt?: string } | null
-  identityTitle?: string
-  aboutLinkLabel?: string
 }
+
+// Floating glass cards inside the branded visual — convey "people, leadership,
+// organization, growth" without relying on stock photography.
+const floatCards = [
+  { icon: TrendingUp, label: 'Growth Readiness', value: 'Score 86' },
+  { icon: Users,      label: 'Leadership Bench',  value: 'Strong' },
+  { icon: Building2,  label: 'Org Design',        value: 'Scalable' },
+  { icon: Target,     label: 'Talent Strategy',   value: 'Aligned' },
+]
 
 export function HeroSection({
   headline,
@@ -42,196 +25,101 @@ export function HeroSection({
   primaryCtaLabel,
   secondaryCtaLabel,
   bookingUrl,
-  portrait,
-  identityTitle,
-  aboutLinkLabel,
 }: HeroProps) {
   return (
-    <section className="relative overflow-hidden bg-surface pt-6 pb-10 sm:pt-12 sm:pb-20 lg:pt-20 lg:pb-28">
-      {/* Subtle background gradient */}
+    <section className="relative -mt-16 overflow-hidden bg-navy text-white">
+      {/* Ambient brand glows */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse 80% 60% at 60% -10%, rgba(37,99,235,0.06) 0%, transparent 70%)',
+            'radial-gradient(ellipse 70% 60% at 75% 10%, rgba(0,194,168,0.18) 0%, transparent 60%), radial-gradient(ellipse 50% 50% at 10% 90%, rgba(123,97,255,0.16) 0%, transparent 60%)',
         }}
       />
 
-      <Container>
-        {/*
-          Layout:
-          - Mobile  (flex-col):       headline/subtext → portrait → identity → CTAs
-          - Desktop (2-col grid):     left = headline + SEO copy + stats + sectors
-                                      right = portrait + identity + CTAs
-          Both columns are desktop-calibrated to be height-equivalent.
-        */}
-        <div className="flex flex-col lg:grid lg:grid-cols-2 gap-5 sm:gap-8 lg:items-start">
+      <Container className="relative">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-10 items-center pt-28 pb-16 sm:pt-32 sm:pb-24">
 
-          {/* ── LEFT COLUMN ─────────────────────────────────────────────── */}
-          <div className="animate-fade-up lg:pt-4">
-
-            {/* Eyebrow */}
-            <p className="text-sm font-semibold uppercase tracking-widest text-orange mb-3 sm:mb-4">
-              HR Business Partner &amp; Talent Strategist
+          {/* ── LEFT — message ─────────────────────────────────────────── */}
+          <div className="animate-fade-up">
+            <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.18em] text-teal-light mb-5">
+              People. Leadership. Organization. Growth.
             </p>
 
-            {/* H1 */}
             <h1
-              className="text-navy leading-tight mb-3 sm:mb-6"
+              className="text-white leading-[1.08]"
               style={{ fontFamily: 'var(--font-display)' }}
             >
-              {headline}
+              {headline.includes('Ready for Growth') ? (
+                <>
+                  Building Organizations <span className="text-gradient">Ready for Growth</span>
+                </>
+              ) : (
+                headline
+              )}
             </h1>
 
-            {/* Subtext */}
-            {subtext && (
-              <p className="text-sm sm:text-base lg:text-lg text-text-muted max-w-xl leading-relaxed">
-                {subtext}
-              </p>
-            )}
+            <p className="mt-5 text-base sm:text-lg text-white/70 max-w-xl leading-relaxed">
+              {subtext}
+            </p>
 
-            {/* ── SEO paragraph — desktop only, bridges subtext → proof points ── */}
-            <div className="hidden lg:block mt-5">
-              <p
-                className="text-base font-bold text-navy mb-2"
-                style={{ fontFamily: 'var(--font-display)' }}
-              >
-                A People-First Approach to Organisational Excellence
-              </p>
-              <p className="text-sm text-text-muted leading-relaxed max-w-lg">
-                Wessam partners with leadership teams across the Middle East and North Africa to
-                transform HR into a strategic growth engine — building talent pipelines, redesigning
-                organisational structures, and coaching leaders through high-stakes people decisions
-                that deliver measurable business outcomes.
-              </p>
-            </div>
-
-            {/* ── 4 Trust stat cards — desktop only ────────────────────────── */}
-            <div className="hidden lg:grid grid-cols-4 gap-3 mt-6">
-              {trustStats.map(({ icon: Icon, value, label }) => (
-                <div
-                  key={label}
-                  className="bg-white rounded-xl border border-border p-3.5 text-center shadow-sm"
-                >
-                  <Icon size={18} className="text-orange mx-auto mb-1.5" aria-hidden />
-                  <p
-                    className="text-xl font-extrabold text-navy leading-none"
-                    style={{ fontFamily: 'var(--font-display)' }}
-                  >
-                    {value}
-                  </p>
-                  <p className="text-xs text-text-muted mt-1 leading-tight">{label}</p>
-                </div>
-              ))}
-            </div>
-
-            {/* ── Sectors served — desktop only ────────────────────────────── */}
-            <div className="hidden lg:block mt-5">
-              <p className="text-xs font-semibold uppercase tracking-widest text-text-subtle mb-2.5">
-                Sectors served
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {industries.map((ind) => (
-                  <span
-                    key={ind}
-                    className="inline-block px-3 py-1 rounded-full bg-blue-light text-navy text-xs font-medium border border-blue-accent/20"
-                  >
-                    {ind}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-          </div>
-
-          {/* ── RIGHT COLUMN ────────────────────────────────────────────── */}
-          <div className="flex flex-col items-center animate-fade-up delay-200">
-
-            {/* Portrait */}
-            <div
-              className="relative w-40 h-40 sm:w-60 sm:h-60 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-white"
-              style={{ boxShadow: 'var(--shadow-card-hover)' }}
-            >
-              {portrait ? (
-                <Image
-                  src={portrait.url}
-                  alt={portrait.alt || 'Wessam Abdelmajeed'}
-                  fill
-                  className="object-cover"
-                  priority
-                  sizes="(max-width: 640px) 160px, (max-width: 1024px) 240px, 288px"
-                />
-              ) : (
-                <Image
-                  src="/images/wessam.png"
-                  alt="Wessam Abdelmajeed — HR Business Partner & Talent Strategist"
-                  fill
-                  className="object-cover object-top"
-                  priority
-                  sizes="(max-width: 640px) 160px, (max-width: 1024px) 240px, 288px"
-                />
-              )}
-            </div>
-
-            {/* Identity + value proposition */}
-            <div className="mt-3 sm:mt-5 text-center max-w-xs">
-
-              {/* Name & title */}
-              <p
-                className="font-bold text-navy text-xl leading-tight"
-                style={{ fontFamily: 'var(--font-display)' }}
-              >
-                Wessam Abdelmajeed
-              </p>
-              {identityTitle && (
-                <p className="text-sm font-semibold text-orange mt-1">{identityTitle}</p>
-              )}
-
-              {/* Credential bullets */}
-              <ul className="mt-3 space-y-1.5 text-left" aria-label="Key credentials">
-                {valueBullets.map((bullet) => (
-                  <li key={bullet} className="flex items-start gap-2 text-sm text-text-muted leading-snug">
-                    <CheckCircle2 size={15} className="text-orange flex-shrink-0 mt-0.5" aria-hidden />
-                    {bullet}
-                  </li>
-                ))}
-              </ul>
-
-              {/* LinkedIn + About links */}
-              <div className="mt-3 flex items-center justify-center gap-4 flex-wrap">
-                <a
-                  href={LINKEDIN_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-accent hover:text-navy transition-colors"
-                  aria-label="Connect with Wessam on LinkedIn"
-                >
-                  <LinkedInIcon size={14} />
-                  LinkedIn
-                </a>
-                {aboutLinkLabel && (
-                  <a
-                    href="/about"
-                    className="inline-flex items-center gap-1.5 text-sm font-medium text-blue-accent hover:text-navy transition-colors"
-                  >
-                    {aboutLinkLabel.replace(/\s*[→»>]+\s*$/, '')}
-                    <ArrowRight size={14} />
-                  </a>
-                )}
-              </div>
-            </div>
-
-            {/* CTAs */}
-            <div className="flex flex-wrap justify-center gap-3 mt-4 sm:mt-6">
+            <div className="mt-8 flex flex-wrap gap-3">
               <Button href={bookingUrl} variant="primary" size="lg">
                 {primaryCtaLabel}
+                <ArrowRight size={18} />
               </Button>
-              <Button href="/services" variant="outline" size="lg">
+              <Button href="/services" variant="outline-light" size="lg">
                 {secondaryCtaLabel}
               </Button>
             </div>
 
+            <p className="mt-6 text-sm text-white/45">
+              Trusted by 50+ scaling businesses across the MENA region.
+            </p>
+          </div>
+
+          {/* ── RIGHT — branded abstract visual ────────────────────────── */}
+          <div className="relative animate-fade-up delay-200 hidden md:block">
+            <div className="relative aspect-[4/3] w-full max-w-lg mx-auto lg:ml-auto">
+              {/* Gradient panel */}
+              <div className="absolute inset-0 rounded-3xl bg-brand-gradient shadow-2xl" />
+              <div
+                aria-hidden
+                className="absolute inset-0 rounded-3xl opacity-40 mix-blend-overlay"
+                style={{
+                  background:
+                    'radial-gradient(circle at 30% 20%, rgba(255,255,255,0.35) 0%, transparent 45%)',
+                }}
+              />
+              {/* Grid texture */}
+              <div
+                aria-hidden
+                className="absolute inset-0 rounded-3xl opacity-[0.12]"
+                style={{
+                  backgroundImage:
+                    'linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)',
+                  backgroundSize: '34px 34px',
+                }}
+              />
+
+              {/* Floating glass cards */}
+              <div className="absolute inset-0 p-6 grid grid-cols-2 grid-rows-2 gap-4">
+                {floatCards.map(({ icon: Icon, label, value }, i) => (
+                  <div
+                    key={label}
+                    className="rounded-2xl bg-white/12 backdrop-blur-md border border-white/20 p-4 flex flex-col justify-between animate-fade-up"
+                    style={{ animationDelay: `${300 + i * 120}ms` }}
+                  >
+                    <Icon size={22} className="text-teal-light" aria-hidden />
+                    <div>
+                      <p className="text-[11px] uppercase tracking-wide text-white/60">{label}</p>
+                      <p className="text-lg font-bold text-white leading-tight">{value}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </Container>

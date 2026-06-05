@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Mail, MapPin } from 'lucide-react'
+import { Mail, MapPin, Phone } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
 import { LinkedInIcon } from '@/components/ui/LinkedInIcon'
 
@@ -7,38 +7,80 @@ type FooterProps = {
   email?: string
   location?: string
   linkedin?: string
+  phone?: string
 }
 
-export function Footer({ email, location, linkedin }: FooterProps) {
+const quickLinks = [
+  { label: 'About Us', href: '/about' },
+  { label: 'Methodology', href: '/methodology' },
+  { label: 'Use Cases', href: '/use-cases' },
+  { label: 'Success Stories', href: '/success-stories' },
+  { label: 'Recommendations', href: '/recommendations' },
+  { label: 'Clients', href: '/clients' },
+  { label: 'Insights', href: '/insights' },
+  { label: 'Contact Us', href: '/contact' },
+]
+
+const solutionLinks = [
+  { label: 'Growth Readiness Diagnostic™', href: '/services#growth-readiness' },
+  { label: 'Fractional CHRO™',             href: '/services#fractional-chro' },
+  { label: 'Organizational Design',        href: '/services#org-design' },
+  { label: 'Leadership Advisory',          href: '/services#leadership-advisory' },
+  { label: 'Executive Search',             href: '/services#executive-search' },
+]
+
+export function Footer({ email, location, linkedin, phone }: FooterProps) {
   const year = new Date().getFullYear()
+  const mail = email || 'business@hplusplus.com'
 
   return (
     <footer className="bg-navy text-white">
       <Container>
-        <div className="py-10 sm:py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10">
+        <div className="py-12 sm:py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
-          <div>
+          <div className="sm:col-span-2 lg:col-span-1">
             <p className="text-2xl font-extrabold tracking-tight mb-3" style={{ fontFamily: 'var(--font-display)' }}>
               <span className="text-white">H</span>
-              <span className="text-orange">++</span>
+              <span className="text-teal">++</span>
             </p>
             <p className="text-sm text-white/60 max-w-xs leading-relaxed">
-              Evolving Human Resources — strategic HR consulting, recruitment, and advisory for organisations that put people first.
+              H++ is a strategic people consulting firm helping organizations build leadership,
+              strengthen teams, and create sustainable growth.
             </p>
+            {linkedin && (
+              <div className="mt-5 flex items-center gap-3">
+                <a
+                  href={linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="H++ on LinkedIn"
+                  className="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-white/10 text-white/80 hover:bg-teal hover:text-navy transition-colors"
+                >
+                  <LinkedInIcon size={16} />
+                </a>
+              </div>
+            )}
           </div>
 
-          {/* Navigation */}
+          {/* Quick Links */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-orange mb-4">Pages</h3>
-            <ul className="space-y-2 text-sm">
-              {[
-                { label: 'Home', href: '/' },
-                { label: 'About', href: '/about' },
-                { label: 'Services', href: '/services' },
-                { label: 'Careers', href: '/careers' },
-                { label: 'Insights', href: '/insights' },
-                { label: 'Contact', href: '/contact' },
-              ].map(({ label, href }) => (
+            <h3 className="text-sm font-semibold uppercase tracking-widest text-teal mb-4">Quick Links</h3>
+            <ul className="space-y-2.5 text-sm">
+              {quickLinks.map(({ label, href }) => (
+                <li key={href}>
+                  <Link href={href} className="text-white/70 hover:text-white transition-colors">
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Solutions */}
+          <div>
+            <h3 className="text-sm font-semibold uppercase tracking-widest text-teal mb-4">Solutions</h3>
+            <ul className="space-y-2.5 text-sm">
+              {solutionLinks.map(({ label, href }) => (
                 <li key={href}>
                   <Link href={href} className="text-white/70 hover:text-white transition-colors">
                     {label}
@@ -50,35 +92,29 @@ export function Footer({ email, location, linkedin }: FooterProps) {
 
           {/* Contact */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-orange mb-4">Get in Touch</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-widest text-teal mb-4">Contact</h3>
             <ul className="space-y-3 text-sm">
-              {email && (
+              <li className="flex items-start gap-2 text-white/70">
+                <MapPin size={15} className="mt-0.5 flex-shrink-0" />
+                <span>{location || 'Cairo, Egypt · Dubai, UAE'}</span>
+              </li>
+              <li>
+                <a
+                  href={`mailto:${mail}`}
+                  className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"
+                >
+                  <Mail size={15} className="flex-shrink-0" />
+                  {mail}
+                </a>
+              </li>
+              {phone && (
                 <li>
                   <a
-                    href={`mailto:${email}`}
+                    href={`tel:${phone.replace(/\s+/g, '')}`}
                     className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"
                   >
-                    <Mail size={15} />
-                    {email}
-                  </a>
-                </li>
-              )}
-              {location && (
-                <li className="flex items-center gap-2 text-white/70">
-                  <MapPin size={15} />
-                  {location}
-                </li>
-              )}
-              {linkedin && (
-                <li>
-                  <a
-                    href={linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 text-white/70 hover:text-white transition-colors"
-                  >
-                    <LinkedInIcon size={15} />
-                    LinkedIn
+                    <Phone size={15} className="flex-shrink-0" />
+                    {phone}
                   </a>
                 </li>
               )}
@@ -87,7 +123,7 @@ export function Footer({ email, location, linkedin }: FooterProps) {
         </div>
 
         <div className="py-6 border-t border-white/10 text-center text-xs text-white/40">
-          <p>© {year} H++ — Wessam Abdelmajeed. All rights reserved.</p>
+          <p>© {year} H++. All rights reserved.</p>
         </div>
       </Container>
     </footer>

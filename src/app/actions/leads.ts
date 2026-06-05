@@ -66,14 +66,14 @@ export async function submitLead(
         resend.emails.send({
           from: fromEmail,
           to: [email],
-          subject: "Thanks for reaching out — I'll be in touch soon",
+          subject: "Thanks for reaching out — we'll be in touch soon",
           html: `
             <p>Hi ${name},</p>
-            <p>Thank you for getting in touch. I've received your message and will get back to you within 24–48 hours.</p>
-            <p>In the meantime, feel free to connect with me on <a href="https://www.linkedin.com/in/wessam-abd-el-majeed/">LinkedIn</a>.</p>
+            <p>Thank you for getting in touch with H++. We've received your message and will get back to you within 24–48 hours.</p>
+            <p>In the meantime, feel free to connect with us on <a href="https://www.linkedin.com/in/wessam-abd-el-majeed/">LinkedIn</a>.</p>
             <br>
             <p>Best regards,</p>
-            <p><strong>Wessam Abdelmajeed</strong><br>HR Business Partner & Talent Strategist<br>H++ | Evolving Human Resources</p>
+            <p><strong>The H++ Team</strong><br>Strategic People Consulting<br>H++ | Building Organizations Ready for Growth</p>
           `,
         }),
       ])

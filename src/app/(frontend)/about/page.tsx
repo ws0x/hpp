@@ -10,7 +10,7 @@ import { CtaBanner } from '@/components/sections/CtaBanner'
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'Learn about Wessam Abdelmajeed — HR Business Partner and Talent Strategist with a proven track record across the MENA region.',
+    'About H++ — a strategic people consulting firm founded by Wessam Abdelmajeed, helping scaling businesses build leadership, structure, and sustainable growth across the MENA region.',
 }
 
 export default async function AboutPage() {
@@ -81,10 +81,11 @@ export default async function AboutPage() {
       <section className="py-16 bg-surface-alt border-b border-border">
         <Container>
           <div className="max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-widest text-orange mb-3">About</p>
-            <h1 className="text-navy mb-4">About Wessam</h1>
+            <p className="text-sm font-semibold uppercase tracking-widest text-teal mb-3">About</p>
+            <h1 className="text-navy mb-4">About H++</h1>
             <p className="text-lg text-text-muted max-w-xl">
-              HR Business Partner & Talent Strategist — helping organisations build and sustain great people culture.
+              A strategic people consulting firm helping scaling businesses build leadership,
+              strengthen teams, and create sustainable, people-powered growth across the MENA region.
             </p>
           </div>
         </Container>
@@ -110,8 +111,12 @@ export default async function AboutPage() {
 
             {/* Bio */}
             <div className="lg:col-span-3">
+              <p className="text-sm font-semibold uppercase tracking-widest text-teal mb-2">Our Founder</p>
+              <h2 className="text-2xl font-bold text-navy">Wessam Abdelmajeed</h2>
+              <p className="text-sm font-semibold text-teal mb-6">Founder &amp; Principal Consultant</p>
+
               {missionStatement && (
-                <blockquote className="border-l-4 border-orange pl-5 mb-8">
+                <blockquote className="border-l-4 border-teal pl-5 mb-8">
                   <p className="text-xl font-semibold text-navy italic leading-relaxed">
                     &ldquo;{missionStatement}&rdquo;
                   </p>
@@ -126,13 +131,19 @@ export default async function AboutPage() {
               ) : (
                 <div className="space-y-4 text-text-muted leading-relaxed">
                   <p>
-                    Wessam Abdelmajeed is a senior HR Business Partner and Talent Strategist with deep expertise across the MENA region. With a career spanning multiple industries and organisations, Wessam brings a rare combination of strategic vision and operational excellence to every engagement.
+                    H++ was founded on a simple conviction: most companies don&rsquo;t have a hiring problem —
+                    they have growth, leadership, and organization challenges. Wessam Abdelmajeed founded H++
+                    to help scaling businesses across the MENA region identify and solve those root causes.
                   </p>
                   <p>
-                    Her philosophy is simple: great organisations are built by great people, and great people thrive when supported by thoughtful HR systems. Whether restructuring a talent acquisition function, building a learning &amp; development programme from scratch, or advising C-suite leaders on people strategy, Wessam delivers real, measurable impact.
+                    Her philosophy is straightforward: great organisations are built by great people, and great
+                    people thrive when supported by thoughtful structures and leadership. From the Growth Readiness
+                    Diagnostic™ to embedded Fractional CHRO™ leadership, organizational design, and executive search,
+                    she brings a rare combination of strategic vision and operational excellence to every engagement.
                   </p>
                   <p>
-                    Through H++, she offers independent consulting, advisory, and training services to companies that want to evolve their HR from administrative overhead into a genuine competitive advantage.
+                    Today, H++ partners with founders, CEOs, and people leaders to turn HR from administrative
+                    overhead into a genuine engine of competitive advantage and sustainable growth.
                   </p>
                 </div>
               )}
@@ -173,11 +184,11 @@ export default async function AboutPage() {
         <section className="py-20 bg-white">
           <Container>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <SectionHeader eyebrow="The Difference" title="Why Work With Wessam" />
+              <SectionHeader eyebrow="The Difference" title="Why Work With H++" />
               <ul className="space-y-4">
                 {whyPoints.map((point, i) => (
                   <li key={i} className="flex items-start gap-3 animate-fade-up" style={{ animationDelay: `${i * 80}ms` }}>
-                    <CheckCircle2 size={22} className="text-orange flex-shrink-0 mt-0.5" aria-hidden />
+                    <CheckCircle2 size={22} className="text-teal flex-shrink-0 mt-0.5" aria-hidden />
                     <span className="text-text font-medium">{point}</span>
                   </li>
                 ))}

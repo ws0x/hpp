@@ -13,7 +13,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="w-full inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-orange text-white font-semibold rounded-lg hover:bg-orange-dark transition-colors disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2"
+      className="w-full inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-teal text-white font-semibold rounded-lg hover:bg-teal-dark transition-colors disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2"
     >
       {pending ? (
         <>
@@ -67,7 +67,7 @@ export function ContactForm({ source = 'contact' }: { source?: string }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-text mb-1.5">
-            Full Name <span className="text-orange" aria-hidden>*</span>
+            Full Name <span className="text-teal" aria-hidden>*</span>
           </label>
           <input
             id="name"
@@ -85,7 +85,7 @@ export function ContactForm({ source = 'contact' }: { source?: string }) {
 
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-text mb-1.5">
-            Email Address <span className="text-orange" aria-hidden>*</span>
+            Email Address <span className="text-teal" aria-hidden>*</span>
           </label>
           <input
             id="email"
@@ -131,7 +131,7 @@ export function ContactForm({ source = 'contact' }: { source?: string }) {
 
       <div>
         <label htmlFor="message" className="block text-sm font-medium text-text mb-1.5">
-          Message <span className="text-orange" aria-hidden>*</span>
+          Message <span className="text-teal" aria-hidden>*</span>
         </label>
         <textarea
           id="message"

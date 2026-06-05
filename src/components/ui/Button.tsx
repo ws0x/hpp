@@ -17,18 +17,18 @@ type ButtonAsLink = BaseProps &
 type ButtonProps = ButtonAsButton | ButtonAsLink
 
 const base =
-  'inline-flex items-center justify-center gap-2 font-semibold rounded-lg transition-all duration-200 cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 no-underline'
+  'inline-flex items-center justify-center gap-2 font-semibold rounded-lg transition-all duration-200 cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 no-underline'
 
 const variants = {
   primary:
-    'bg-orange !text-white hover:bg-orange-dark active:scale-[0.98] shadow-sm',
+    'bg-teal !text-navy hover:bg-teal-light active:scale-[0.98] shadow-sm',
   secondary:
-    'bg-navy !text-white hover:bg-navy-dark active:scale-[0.98] shadow-sm',
+    'bg-navy !text-white hover:bg-navy-light active:scale-[0.98] shadow-sm',
   outline:
     'border-2 border-navy !text-navy bg-transparent hover:bg-navy hover:!text-white active:scale-[0.98]',
   // Use on dark/navy backgrounds — text stays white regardless of bg
   'outline-light':
-    'border-2 border-white/40 !text-white bg-transparent hover:bg-white/10 hover:!text-white active:scale-[0.98]',
+    'border-2 border-white/30 !text-white bg-transparent hover:bg-white/10 hover:!text-white active:scale-[0.98]',
   ghost:
     '!text-navy bg-transparent hover:bg-blue-light active:scale-[0.98]',
 }

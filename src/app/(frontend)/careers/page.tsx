@@ -42,7 +42,7 @@ const experienceLevelLabels: Record<string, string> = {
 
 const typeColors: Record<string, string> = {
   'full-time': 'bg-blue-light text-navy',
-  'part-time': 'bg-orange/10 text-orange-dark',
+  'part-time': 'bg-teal/10 text-teal-dark',
   contract: 'bg-purple-50 text-purple-700',
   freelance: 'bg-teal-50 text-teal-700',
   internship: 'bg-green-50 text-green-700',
@@ -166,7 +166,7 @@ export default async function CareersPage() {
                             {experienceLevelLabels[job.experienceLevel] ?? job.experienceLevel}
                           </span>
                           {isExpiringSoon && (
-                            <span className="text-xs font-semibold text-orange bg-orange/10 px-2.5 py-1 rounded-full">
+                            <span className="text-xs font-semibold text-teal bg-teal/10 px-2.5 py-1 rounded-full">
                               Closing soon
                             </span>
                           )}

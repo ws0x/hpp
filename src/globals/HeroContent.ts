@@ -16,7 +16,7 @@ export const HeroContent: GlobalConfig = {
       type: 'text',
       required: true,
       label: 'Headline',
-      defaultValue: 'Evolving Human Resources',
+      defaultValue: 'Building Organizations Ready for Growth',
       admin: {
         description: 'Main large heading. Keep it powerful and short.',
       },
@@ -26,19 +26,19 @@ export const HeroContent: GlobalConfig = {
       type: 'textarea',
       label: 'Supporting Text',
       defaultValue:
-        'Empowering organisations to grow through people. Innovative HR solutions, tailored strategies, and real impact — all in one place.',
+        'Strategic people consulting that helps scaling businesses unlock potential, build strong leadership, and create high-performing organizations.',
     },
     {
       name: 'primaryCtaLabel',
       type: 'text',
       label: 'Primary CTA Label',
-      defaultValue: "Let's Connect",
+      defaultValue: 'Get Your Growth Readiness Assessment',
     },
     {
       name: 'secondaryCtaLabel',
       type: 'text',
       label: 'Secondary CTA Label',
-      defaultValue: 'View My Services',
+      defaultValue: 'Our Solutions',
     },
     {
       name: 'portrait',

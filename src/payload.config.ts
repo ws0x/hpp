@@ -12,6 +12,9 @@ import { Media } from './collections/Media'
 import { Posts } from './collections/Posts'
 import { Services } from './collections/Services'
 import { Testimonials } from './collections/Testimonials'
+import { Recommendations } from './collections/Recommendations'
+import { UseCases } from './collections/UseCases'
+import { ClientLogos } from './collections/ClientLogos'
 import { Certifications } from './collections/Certifications'
 import { Leads } from './collections/Leads'
 import { Subscribers } from './collections/Subscribers'
@@ -68,7 +71,7 @@ export default buildConfig({
 
   admin: {
     user: Users.slug,
-    // Lock the admin to light mode so the navy + orange brand reads correctly
+    // Lock the admin to light mode so the navy + teal brand reads correctly
     // and the experience is consistent regardless of the operator's OS theme.
     theme: 'light',
     meta: {
@@ -82,7 +85,7 @@ export default buildConfig({
   },
 
   collections: [
-    Users, Media, Posts, Services, Testimonials,
+    Users, Media, Posts, Services, Testimonials, Recommendations, UseCases, ClientLogos,
     Certifications, Leads, Subscribers, Jobs, JobApplications, TalentProfiles,
   ],
 

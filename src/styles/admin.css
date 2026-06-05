@@ -1,17 +1,17 @@
 /* ============================================================================
    H++ Admin — brand theme & UX polish for Payload CMS 3.x
    Loaded after @payloadcms/next/css, so these rules win on equal specificity.
-   Brand: deep navy (#1B2B6B) + orange accent (#F97316) on a light base.
+   Brand: deep navy (#0B132B) + teal accent (#00C2A8) on a light base.
    ========================================================================== */
 
 /* ── Design tokens ─────────────────────────────────────────────────────────*/
 :root {
-  --hpp-navy:        #1B2B6B;
-  --hpp-navy-dark:   #142054;
-  --hpp-navy-light:  #243585;
-  --hpp-orange:      #F97316;
-  --hpp-orange-dark: #EA6C09;
-  --hpp-blue:        #2563EB;
+  --hpp-navy:        #0B132B;
+  --hpp-navy-dark:   #060B18;
+  --hpp-navy-light:  #1C2541;
+  --hpp-teal:      #00C2A8;
+  --hpp-teal-dark: #00A892;
+  --hpp-blue:        #00C2A8;
   --hpp-border:      #e2e8f0;
   --hpp-surface:     #ffffff;
   --hpp-surface-alt: #f8fafc;
@@ -167,7 +167,7 @@ body {
 .nav a[aria-current="page"] {
   color: #fff !important;
   background: rgba(249, 115, 22, 0.18) !important;
-  box-shadow: inset 3px 0 0 var(--hpp-orange) !important;
+  box-shadow: inset 3px 0 0 var(--hpp-teal) !important;
 }
 
 .nav__controls,
@@ -342,14 +342,14 @@ input.search-filter__input,
 
 .btn--style-primary,
 button[class*="btn--style-primary"] {
-  background: var(--hpp-orange) !important;
-  border-color: var(--hpp-orange) !important;
+  background: var(--hpp-teal) !important;
+  border-color: var(--hpp-teal) !important;
   color: #fff !important;
 }
 
 .btn--style-primary:hover {
-  background: var(--hpp-orange-dark) !important;
-  border-color: var(--hpp-orange-dark) !important;
+  background: var(--hpp-teal-dark) !important;
+  border-color: var(--hpp-teal-dark) !important;
 }
 
 .btn--style-secondary {

@@ -22,7 +22,7 @@ export const SiteSettings: GlobalConfig = {
       name: 'tagline',
       type: 'text',
       label: 'Tagline',
-      defaultValue: 'Evolving Human Resources',
+      defaultValue: 'Building Organizations Ready for Growth',
     },
     {
       name: 'logo',
@@ -50,12 +50,13 @@ export const SiteSettings: GlobalConfig = {
           name: 'phone',
           type: 'text',
           label: 'Phone Number',
+          defaultValue: '+20 100 123 4567',
         },
         {
           name: 'location',
           type: 'text',
           label: 'Location / City',
-          defaultValue: 'MENA Region',
+          defaultValue: 'Cairo, Egypt · Dubai, UAE',
         },
       ],
     },
@@ -100,14 +101,14 @@ export const SiteSettings: GlobalConfig = {
           name: 'defaultMetaTitle',
           type: 'text',
           label: 'Default Meta Title',
-          defaultValue: 'H++ | Evolving Human Resources',
+          defaultValue: 'H++ | Building Organizations Ready for Growth',
         },
         {
           name: 'defaultMetaDescription',
           type: 'textarea',
           label: 'Default Meta Description',
           defaultValue:
-            'Wessam Abdelmajeed — HR Business Partner & Talent Strategist. Innovative HR consulting, recruitment, and advisory solutions across the MENA region.',
+            'H++ is a strategic people consulting firm helping scaling businesses build scalable organizations, stronger leadership teams, and high-performing workforces across the MENA region.',
         },
         {
           name: 'defaultOgImage',

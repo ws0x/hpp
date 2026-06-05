@@ -14,7 +14,7 @@ function SubmitBtn() {
     <button
       type="submit"
       disabled={pending}
-      className="flex-shrink-0 inline-flex items-center justify-center gap-2 px-6 py-3 bg-orange text-white font-semibold rounded-lg hover:bg-orange-dark transition-colors cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange focus-visible:ring-offset-2 whitespace-nowrap"
+      className="flex-shrink-0 inline-flex items-center justify-center gap-2 px-6 py-3 bg-teal text-white font-semibold rounded-lg hover:bg-teal-dark transition-colors cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 whitespace-nowrap"
     >
       {pending ? <Loader2 size={16} className="animate-spin" /> : <Mail size={16} />}
       {pending ? 'Subscribing…' : 'Get HR Insights'}
@@ -29,8 +29,8 @@ export function NewsletterSection() {
     <section className="py-16 bg-blue-light border-y border-border">
       <Container>
         <div className="max-w-2xl mx-auto text-center">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-orange/10 mb-4">
-            <Mail size={22} className="text-orange" />
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-teal/10 mb-4">
+            <Mail size={22} className="text-teal" />
           </div>
           <h2 className="text-navy text-2xl font-bold mb-2">
             Get Weekly HR Insights

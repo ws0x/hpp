@@ -70,7 +70,7 @@ export function TalentRegistrationForm() {
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="talent-name" className="block text-sm font-semibold text-navy mb-1.5">
-            Full Name <span className="text-orange">*</span>
+            Full Name <span className="text-teal">*</span>
           </label>
           <input
             id="talent-name"
@@ -83,7 +83,7 @@ export function TalentRegistrationForm() {
         </div>
         <div>
           <label htmlFor="talent-email" className="block text-sm font-semibold text-navy mb-1.5">
-            Email Address <span className="text-orange">*</span>
+            Email Address <span className="text-teal">*</span>
           </label>
           <input
             id="talent-email"
@@ -200,7 +200,7 @@ export function TalentRegistrationForm() {
       <button
         type="submit"
         disabled={pending}
-        className="w-full flex items-center justify-center gap-2 bg-orange text-white font-semibold text-sm px-6 py-3 rounded-lg hover:bg-orange-dark transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="w-full flex items-center justify-center gap-2 bg-teal text-white font-semibold text-sm px-6 py-3 rounded-lg hover:bg-teal-dark transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {pending ? (
           <>

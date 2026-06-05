@@ -10,9 +10,9 @@ type CtaBannerProps = {
 }
 
 export function CtaBanner({
-  title = 'Ready to transform your HR?',
-  subtitle = "Let's talk. Whether you're growing a startup or scaling a team, I can help.",
-  primaryLabel = 'Book a Call',
+  title = "Ready to Unlock Your Organization's Potential?",
+  subtitle = "Let's start with a conversation. We'll help you identify what's holding your growth back — and how to move forward.",
+  primaryLabel = 'Book a Discovery Call',
   secondaryLabel = 'Send a Message',
   bookingUrl,
 }: CtaBannerProps) {
@@ -24,7 +24,7 @@ export function CtaBanner({
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse 60% 80% at 90% 50%, rgba(249,115,22,0.12) 0%, transparent 65%)',
+            'radial-gradient(ellipse 60% 80% at 90% 50%, rgba(0,194,168,0.14) 0%, transparent 65%)',
         }}
       />
 

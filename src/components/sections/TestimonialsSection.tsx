@@ -34,7 +34,7 @@ export function TestimonialsSection({ testimonials }: { testimonials: Testimonia
             >
               <Quote
                 size={28}
-                className="text-orange mb-4 flex-shrink-0"
+                className="text-teal mb-4 flex-shrink-0"
                 aria-hidden
               />
               <p className="text-text-muted leading-relaxed text-sm flex-1 mb-6">

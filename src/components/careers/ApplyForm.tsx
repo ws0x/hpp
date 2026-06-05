@@ -33,7 +33,7 @@ export function ApplyForm({ jobId, jobTitle }: { jobId: string; jobTitle: string
 
       <div>
         <label htmlFor="applicantName" className="block text-sm font-semibold text-navy mb-1.5">
-          Full Name <span className="text-orange">*</span>
+          Full Name <span className="text-teal">*</span>
         </label>
         <input
           id="applicantName"
@@ -47,7 +47,7 @@ export function ApplyForm({ jobId, jobTitle }: { jobId: string; jobTitle: string
 
       <div>
         <label htmlFor="email" className="block text-sm font-semibold text-navy mb-1.5">
-          Email Address <span className="text-orange">*</span>
+          Email Address <span className="text-teal">*</span>
         </label>
         <input
           id="email"
