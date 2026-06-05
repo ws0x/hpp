@@ -48,7 +48,6 @@ export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
   	"created_at" timestamp(3) with time zone DEFAULT now() NOT NULL
   );
   
-  ALTER TABLE "services" ALTER COLUMN "icon" SET DEFAULT 'growth-readiness';
   ALTER TABLE "site_settings" ALTER COLUMN "tagline" SET DEFAULT 'Building Organizations Ready for Growth';
   ALTER TABLE "site_settings" ALTER COLUMN "email" SET DEFAULT 'business@hplusplus.com';
   ALTER TABLE "site_settings" ALTER COLUMN "phone" SET DEFAULT '+20 100 123 4567';

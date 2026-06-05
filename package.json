@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "next dev --webpack",
-    "build": "patch-package && next build",
+    "build": "patch-package && npx tsx node_modules/payload/bin.js migrate && next build",
     "start": "next start",
     "lint": "eslint",
     "postinstall": "patch-package",
