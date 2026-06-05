@@ -73,12 +73,18 @@ export const metadata: Metadata = {
   // ── Icons ─────────────────────────────────────────────────────────────────
   icons: {
     icon: [
-      { url: '/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.ico',  sizes: '16x16 32x32 48x48', type: 'image/x-icon' },
+      { url: '/favicon.svg',  type: 'image/svg+xml' },
+      { url: '/icon-192.png', sizes: '192x192',            type: 'image/png' },
+      { url: '/icon-512.png', sizes: '512x512',            type: 'image/png' },
     ],
-    shortcut: '/favicon.svg',
-    apple: '/favicon.svg',
+    shortcut:   '/favicon.ico',
+    apple:      [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+    other: [
+      { rel: 'mask-icon', url: '/favicon.svg', color: '#00C2A8' },
+    ],
   },
+  manifest: '/site.webmanifest',
 
   // ── Robots ────────────────────────────────────────────────────────────────
   robots: {
@@ -115,7 +121,9 @@ const organizationJsonLd = {
       url: siteUrl,
       logo: {
         '@type': 'ImageObject',
-        url: `${siteUrl}/favicon.svg`,
+        url: `${siteUrl}/icon-512.png`,
+        width: 512,
+        height: 512,
       },
       slogan: 'Building Organizations Ready for Growth',
       description:
