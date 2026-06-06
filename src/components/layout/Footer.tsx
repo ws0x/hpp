@@ -122,7 +122,7 @@ export function Footer({ email, location, linkedin, phone }: FooterProps) {
           </div>
         </div>
 
-        <div className="py-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-2 text-xs text-white/40">
+        <div className="py-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-2 text-xs text-white/50">
           <p>© {year} H++. All rights reserved.</p>
           <p className="flex items-center gap-1.5">
             <span>Crafted by</span>
@@ -130,7 +130,7 @@ export function Footer({ email, location, linkedin, phone }: FooterProps) {
               href="https://www.binhakim.dev"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-white/70 hover:text-teal transition-colors"
+              className="font-semibold text-teal hover:text-teal-light transition-colors"
             >
               binhakim.dev
             </a>
