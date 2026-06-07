@@ -9,7 +9,7 @@ import { ContactForm } from '@/components/ui/ContactForm'
 export const metadata: Metadata = {
   title: 'Contact',
   description:
-    "Get in touch with H++ — book a discovery call or send a message about your organization's growth, leadership, and talent challenges across the MENA region.",
+    "Get in touch with H++و book a discovery call or send a message about your organization's growth, leadership, and talent challenges across the MENA region.",
 }
 
 export default async function ContactPage() {

@@ -14,12 +14,12 @@ const phases = [
   {
     step: '01',
     title: 'Diagnose',
-    body: 'We start by understanding the real challenge — not the symptom. Through structured data, leadership conversations, and organizational analysis, we surface the root causes behind your people and growth challenges.',
+    body: 'We start by understanding the real challenge not the symptom. Through structured data, leadership conversations, and organizational analysis, we surface the root causes behind your people and growth challenges.',
   },
   {
     step: '02',
     title: 'Design',
-    body: 'We translate insight into a practical plan. Tailored strategies, structures, and interventions are designed around your business goals, growth stage, and culture — never off-the-shelf templates.',
+    body: 'We translate insight into a practical plan. Tailored strategies, structures, and interventions are designed around your business goals, growth stage, and culture, never off-the-shelf templates.',
   },
   {
     step: '03',
@@ -29,7 +29,7 @@ const phases = [
   {
     step: '04',
     title: 'Drive Results',
-    body: 'We measure what matters, refine the approach, and keep optimising — turning one-off projects into sustained, people-powered business performance.',
+    body: 'We measure what matters, refine the approach, and keep optimising, turning one-off projects into sustained, people-powered business performance.',
   },
 ]
 
@@ -50,7 +50,7 @@ export default async function MethodologyPage() {
             <p className="text-sm font-semibold uppercase tracking-widest text-teal mb-3">Our Methodology</p>
             <h1 className="text-navy mb-4">A Clear Path from Insight to Impact</h1>
             <p className="text-lg text-text-muted max-w-xl">
-              Every engagement follows a disciplined, evidence-based process — so you always know what
+              Every engagement follows a disciplined, evidence-based process, so you always know what
               we are doing, why, and what business outcome it drives.
             </p>
           </div>

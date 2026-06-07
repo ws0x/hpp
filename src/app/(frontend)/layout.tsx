@@ -48,16 +48,16 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: siteUrl,
-    siteName: 'H++ — Strategic People Consulting',
+    siteName: 'H++ | Strategic People Consulting',
     title: 'H++ | Building Organizations Ready for Growth',
     description:
-      'Strategic people consulting — Growth Readiness Diagnostic™, Fractional CHRO™, organizational design, leadership advisory & executive search across the MENA region.',
+      'Strategic people consulting - Growth Readiness Diagnostic™, Fractional CHRO™, organizational design, leadership advisory & executive search across the MENA region.',
     images: [
       {
         url: '/og.png',
         width: 1200,
         height: 630,
-        alt: 'H++ — Building Organizations Ready for Growth',
+        alt: 'H++ | Building Organizations Ready for Growth',
       },
     ],
   },
@@ -109,7 +109,7 @@ export const metadata: Metadata = {
   ],
 }
 
-// Global JSON-LD — Organisation + Founder structured data on every page
+// Global JSON-LD - Organisation + Founder structured data on every page
 const organizationJsonLd = {
   '@context': 'https://schema.org',
   '@graph': [

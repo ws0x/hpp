@@ -43,7 +43,7 @@ const defaultServices: ServiceItem[] = [
     id: '1',
     title: 'Growth Readiness Diagnostic™',
     shortDescription:
-      "Assess your organization's ability to scale successfully. A comprehensive diagnostic that reveals strengths, risks, and growth opportunities — and gives you a clear roadmap to act on.",
+      "Assess your organization's ability to scale successfully. A comprehensive diagnostic that reveals strengths, risks, and growth opportunities, and gives you a clear roadmap to act on.",
     highlights: [
       'Leadership Assessment',
       'Organizational Structure Review',
@@ -75,7 +75,7 @@ const defaultServices: ServiceItem[] = [
     id: '3',
     title: 'Organizational Design & Transformation',
     shortDescription:
-      'Build scalable structures that support growth — clear roles, effective operating models, and the org architecture to scale without chaos.',
+      'Build scalable structures that support growth, clear roles, effective operating models, and the org architecture to scale without chaos.',
     highlights: [
       'Operating model design',
       'Role & responsibility clarity',
@@ -90,7 +90,7 @@ const defaultServices: ServiceItem[] = [
     id: '4',
     title: 'Leadership Advisory',
     shortDescription:
-      'Develop strong leaders and aligned teams that drive performance and results — from the C-suite to emerging leadership.',
+      'Develop strong leaders and aligned teams that drive performance and results, from the C-suite to emerging leadership.',
     highlights: [
       'Leadership assessment',
       'Executive coaching & advisory',

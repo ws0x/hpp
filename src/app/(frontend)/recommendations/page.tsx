@@ -10,7 +10,7 @@ import { getPayloadClient } from '@/lib/payload'
 export const metadata: Metadata = {
   title: 'Recommendations',
   description:
-    'Professional recommendations for H++ — what leaders across the MENA region say about working with our strategic people consulting team.',
+    'Professional recommendations for H++ - what leaders across the MENA region say about working with our strategic people consulting team.',
 }
 
 type Recommendation = {
@@ -47,7 +47,7 @@ const fallback: Recommendation[] = [
     role: 'VP, People & Culture',
     company: 'High-growth retail brand',
     quote:
-      'The Growth Readiness Diagnostic gave our board a clear, honest picture — and a roadmap we are still executing against today.',
+      'The Growth Readiness Diagnostic gave our board a clear, honest picture and a roadmap we are still executing against today.',
   },
 ]
 
@@ -90,7 +90,7 @@ export default async function RecommendationsPage() {
             <p className="text-sm font-semibold uppercase tracking-widest text-teal mb-3">Recommendations</p>
             <h1 className="text-navy mb-4">What Leaders Say About Working With Us</h1>
             <p className="text-lg text-text-muted max-w-xl">
-              Trusted by founders, CEOs, and people leaders across the MENA region — in their words.
+              Trusted by founders, CEOs, and people leaders across the MENA region in their words.
             </p>
           </div>
         </Container>

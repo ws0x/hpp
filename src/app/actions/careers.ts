@@ -100,7 +100,7 @@ export async function submitApplication(
           html: `
             <p>Hi ${applicantName},</p>
             <p>Thank you for applying for <strong>${jobTitle}</strong> through H++. We've received your application and will review it carefully.</p>
-            <p>If your profile is a strong match, a member of our team will be in touch within 5–7 business days.</p>
+            <p>If your profile is a strong match, a member of our team will be in touch within 5 - 7 business days.</p>
             <br>
             <p>In the meantime, feel free to explore more opportunities at <a href="${siteUrl}/careers">${siteUrl}/careers</a>.</p>
             <br>
@@ -231,7 +231,7 @@ export async function registerTalentProfile(
         html: `
           <p>Hi ${name},</p>
           <p>Thanks for registering with H++! Your profile is now in our talent pool. When a role matching your background comes up, we'll reach out directly.</p>
-          <p>No need to keep checking job boards — we'll come to you.</p>
+          <p>No need to keep checking job boards, we'll come to you.</p>
           <br>
           <p>Best,<br><strong>Wessam Abdelmajeed</strong><br>H++ | Evolving Human Resources</p>
         `,

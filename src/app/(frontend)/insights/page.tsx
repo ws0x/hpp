@@ -9,7 +9,7 @@ import { SectionHeader } from '@/components/ui/SectionHeader'
 export const metadata: Metadata = {
   title: 'Insights',
   description:
-    'HR insights, strategy articles, and practical advice from Wessam Abdelmajeed — covering HR strategy, recruitment, leadership, and the MENA market.',
+    'HR insights, strategy articles, and practical advice from Wessam Abdelmajeed covering HR strategy, recruitment, leadership, and the MENA market.',
 }
 
 const categoryLabels: Record<string, string> = {
@@ -86,7 +86,7 @@ export default async function InsightsPage() {
           <SectionHeader
             eyebrow="Insights"
             title="Ideas, strategy & HR thinking"
-            description="Practical articles on HR strategy, talent, leadership, and the MENA market — written from the field, not a textbook."
+            description="Practical articles on HR strategy, talent, leadership, and the MENA market written from the field, not a textbook."
           />
         </Container>
       </section>

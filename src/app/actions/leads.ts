@@ -66,7 +66,7 @@ export async function submitLead(
         resend.emails.send({
           from: fromEmail,
           to: [email],
-          subject: "Thanks for reaching out — we'll be in touch soon",
+          subject: "Thanks for reaching out, we'll be in touch soon",
           html: `
             <p>Hi ${name},</p>
             <p>Thank you for getting in touch with H++. We've received your message and will get back to you within 24–48 hours.</p>
